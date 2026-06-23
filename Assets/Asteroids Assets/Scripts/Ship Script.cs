@@ -39,6 +39,8 @@ public class ShipScript : MonoBehaviour
     }
     public void Take_Damage(float damage)
     {
+        Current_HP = Current_HP - damage;
+
         if (Current_HP <= 0f)
         {
             Explode();
