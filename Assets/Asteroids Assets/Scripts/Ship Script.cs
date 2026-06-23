@@ -37,4 +37,17 @@ public class ShipScript : MonoBehaviour
         float Torque = amount * Turn_Power * Time.deltaTime;
         rb2D.AddTorque(Torque);
     }
+    public void Take_Damage(float damage)
+    {
+        if (Current_HP <= 0f)
+        {
+            Explode();
+        }
+    }
+
+    public void Explode()
+    {
+        Debug.Log("Game Over");
+        Destroy(gameObject);
+    }
 }    
