@@ -3,7 +3,9 @@ using UnityEngine;
 
 public class MeteorScript : MonoBehaviour
 {
-    public float Collition_Damage = 1f;
+    public float Max_HP = 3f;
+    public float Current_HP;
+    public float Collision_Damage = 1f;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -16,12 +18,29 @@ public class MeteorScript : MonoBehaviour
 
     }
 
-    public void OnCollisionEnter2D(Collision2D collision)
+    public void OnCollisionEnter2D(Collision2D Collision)
     {
-        ShipScript Ship = collision.gameObject.GetComponent<ShipScript>();
+        ShipScript Ship = Collision.gameObject.GetComponent<ShipScript>();
         if (Ship != null)
         {
-            Ship.Take_Damage(Collition_Damage);
+            Ship.Take_Damage(Collision_Damage);
         }
     }
+
+
+    public void Take_Damage(float damage)
+    {
+        Current_HP = Current_HP - damage;
+
+        if (Current_HP <= 0f)
+        {
+            Explode();
+        }
+    }
+
+        public void Explode()
+        {
+            Destroy(gameObject);
+        }
 }
+
