@@ -9,6 +9,7 @@ public class ShipScript : MonoBehaviour
     public float Current_HP;
     public GameObject Bullet_Ref;
     public float Bullet_Speed = 100f;
+    public GameObject Explosion_Ref;
 
     private Rigidbody2D rb2D;
     private float Fire_Timer = 0f;
@@ -54,6 +55,7 @@ public class ShipScript : MonoBehaviour
 
     public void Explode()
     {
+        Instantiate(Explosion_Ref, transform.position, transform.rotation);
         Debug.Log("Game Over");
         Destroy(gameObject);
     }

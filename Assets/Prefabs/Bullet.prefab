@@ -11,6 +11,8 @@ GameObject:
   - component: {fileID: 4030875450173598545}
   - component: {fileID: 2002673404715721713}
   - component: {fileID: -7860604729427531108}
+  - component: {fileID: 7805626142283076261}
+  - component: {fileID: -5607589262374865909}
   - component: {fileID: -4072056869797759921}
   - component: {fileID: 5585163009530234757}
   m_Layer: 0
@@ -126,6 +128,31 @@ CircleCollider2D:
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
   m_Radius: 0.49999997
+--- !u!114 &7805626142283076261
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5078401063653218294}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7db003fd686bf6847ab409c062d4849d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Life_Time: 5
+--- !u!114 &-5607589262374865909
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5078401063653218294}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 94a0eac4a4a1e584abbefde4bf831c18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!50 &-4072056869797759921
 Rigidbody2D:
   serializedVersion: 5
@@ -166,3 +193,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Collition_Damage: 1
+  Explosion_Ref: {fileID: 3345248609389438901, guid: 7764f9be368d6e14fb4831a944ebec3c, type: 3}

@@ -3,7 +3,8 @@ using UnityEngine;
 public class BulletScript : MonoBehaviour
 {
     public float Collition_Damage = 1f;
-  
+    public GameObject Explosion_Ref;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -30,6 +31,7 @@ public class BulletScript : MonoBehaviour
 
     public void Explode()
     {
+        Instantiate(Explosion_Ref, transform.position, transform.rotation);
         Destroy(gameObject);
     }
 }

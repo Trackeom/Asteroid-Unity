@@ -6,6 +6,7 @@ public class MeteorScript : MonoBehaviour
     public float Max_HP = 3f;
     public float Current_HP;
     public float Collision_Damage = 1f;
+    public GameObject Explosion_Ref;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -40,6 +41,7 @@ public class MeteorScript : MonoBehaviour
 
         public void Explode()
         {
+            Instantiate(Explosion_Ref, transform.position, transform.rotation);
             Destroy(gameObject);
         }
 }
