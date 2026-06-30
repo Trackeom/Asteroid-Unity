@@ -214,3 +214,9 @@ MonoBehaviour:
   Current_HP: 0
   Collision_Damage: 1
   Explosion_Ref: {fileID: 3345248609389438901, guid: 7764f9be368d6e14fb4831a944ebec3c, type: 3}
+  Meteor_Chunks:
+  - {fileID: 3929502818366394321, guid: 50af7992fe6e50c429f984826f5d119d, type: 3}
+  - {fileID: 3929502818366394321, guid: 50af7992fe6e50c429f984826f5d119d, type: 3}
+  - {fileID: 3929502818366394321, guid: 50af7992fe6e50c429f984826f5d119d, type: 3}
+  - {fileID: 4462251006782469672, guid: ad25cfc85965dc340a6794698caa1661, type: 3}
+  - {fileID: 4462251006782469672, guid: ad25cfc85965dc340a6794698caa1661, type: 3}
