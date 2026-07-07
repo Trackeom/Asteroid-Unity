@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class ShipScript : MonoBehaviour
 {
+    public AudioSource Retro_Funk;
+    public AudioSource Ship_Damage;
     public float Firing_Rate = 0.33f;
     public float Engine_Power = 10f;
     public float Turn_Power = -10f;
@@ -19,6 +21,7 @@ public class ShipScript : MonoBehaviour
     {
         Current_HP = Max_HP;
         rb2D = GetComponent<Rigidbody2D>();
+        Retro_Funk.Play();
     }
 
     // Update is called once per frame
@@ -34,8 +37,11 @@ public class ShipScript : MonoBehaviour
 
     private void Apply_Thrust(float amount)
     {
-        Vector2 Thrust = transform.up * Engine_Power * Time.deltaTime * amount;
-        rb2D.AddForce(Thrust);
+        if (amount > 0f)
+        {
+            Vector2 Thrust = transform.up * Engine_Power * Time.deltaTime * amount;
+            rb2D.AddForce(Thrust);
+        }
     }
 
     private void Apply_Torque(float amount)
@@ -46,11 +52,11 @@ public class ShipScript : MonoBehaviour
     public void Take_Damage(float damage)
     {
         Current_HP = Current_HP - damage;
-
         if (Current_HP <= 0f)
         {
             Explode();
         }
+        Ship_Damage.Play();
     }
 
     public void Explode()
@@ -58,6 +64,7 @@ public class ShipScript : MonoBehaviour
         Instantiate(Explosion_Ref, transform.position, transform.rotation);
         Debug.Log("Game Over");
         Destroy(gameObject);
+        Retro_Funk.Stop();
     }
 
     public void Fire_Bullet()
@@ -78,5 +85,4 @@ public class ShipScript : MonoBehaviour
             Fire_Timer = Firing_Rate;
         }
     }
-
 }    
