@@ -12,6 +12,7 @@ public class ShipScript : MonoBehaviour
     public GameObject Bullet_Ref;
     public float Bullet_Speed = 100f;
     public GameObject Explosion_Ref;
+    public ScreenFlash Flash;
 
     private Rigidbody2D rb2D;
     private float Fire_Timer = 0f;
@@ -49,6 +50,7 @@ public class ShipScript : MonoBehaviour
         float Torque = amount * Turn_Power * Time.deltaTime;
         rb2D.AddTorque(Torque);
     }
+
     public void Take_Damage(float damage)
     {
         Current_HP = Current_HP - damage;
@@ -56,8 +58,12 @@ public class ShipScript : MonoBehaviour
         {
             Explode();
         }
-        Ship_Damage.Play();
+        Ship_Damage.Play(); 
+        StartCoroutine(Flash.Flash_Routine());
     }
+
+
+  
 
     public void Explode()
     {
