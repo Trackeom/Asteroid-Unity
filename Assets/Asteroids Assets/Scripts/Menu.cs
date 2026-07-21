@@ -17,7 +17,7 @@ public class Menu : MonoBehaviour
 
     public void Click_To_Play()
     {
-        SceneManager.LoadScene("SampleScene");
+        SceneManager.LoadScene("Play");
     }
 
     public void Click_To_Quit()

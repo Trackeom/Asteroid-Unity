@@ -13,6 +13,7 @@ public class MeteorScript : MonoBehaviour
     public int Max_Chunks = 3;
     public float Explosion_Dist = 0.5f;
     public float Explosion_Force = 10f;
+    public int Score_Value = 10;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -54,6 +55,11 @@ public class MeteorScript : MonoBehaviour
             for (int i = 0; i < Meteor_Chunks; i++)
             {
                 Create_Meteor_Chunk();
+            }
+            ShipScript ship = FindObjectOfType<ShipScript>();
+            if (ship != null)
+            {
+                ship.Score += Score_Value;
             }
         }
 

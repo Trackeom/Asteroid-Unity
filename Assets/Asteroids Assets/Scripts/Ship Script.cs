@@ -4,6 +4,7 @@ public class ShipScript : MonoBehaviour
 {
     public AudioSource Retro_Funk;
     public AudioSource Ship_Damage;
+    public AudioSource Ship_Turn;
     public float Firing_Rate = 0.33f;
     public float Engine_Power = 10f;
     public float Turn_Power = -10f;
@@ -13,6 +14,7 @@ public class ShipScript : MonoBehaviour
     public float Bullet_Speed = 100f;
     public GameObject Explosion_Ref;
     public ScreenFlash Flash;
+    public int Score = 0;
 
     private Rigidbody2D rb2D;
     private float Fire_Timer = 0f;
@@ -49,6 +51,7 @@ public class ShipScript : MonoBehaviour
     {
         float Torque = amount * Turn_Power * Time.deltaTime;
         rb2D.AddTorque(Torque);
+        Ship_Turn.Play();
     }
 
     public void Take_Damage(float damage)
@@ -58,19 +61,17 @@ public class ShipScript : MonoBehaviour
         {
             Explode();
         }
-        Ship_Damage.Play(); 
+        Ship_Damage.Play();
         StartCoroutine(Flash.Flash_Routine());
     }
-
-
-  
 
     public void Explode()
     {
         Instantiate(Explosion_Ref, transform.position, transform.rotation);
         Debug.Log("Game Over");
-        Destroy(gameObject);
         Retro_Funk.Stop();
+        Game_Over();
+        Destroy(gameObject);
     }
 
     public void Fire_Bullet()
@@ -90,5 +91,32 @@ public class ShipScript : MonoBehaviour
             Fire_Bullet();
             Fire_Timer = Firing_Rate;
         }
+    }
+
+        public int Get_High_Score()
+    {
+        return PlayerPrefs.GetInt("High Score", 0);
+    }
+
+    public void Set_High_Score(int score)
+    {
+        PlayerPrefs.SetInt("High Score", score);
+    }
+
+    public void Game_Over()
+    {
+        bool Celebrate_High_Score = false;
+        if (Score > Get_High_Score())
+        {
+            Set_High_Score(Score);
+            Celebrate_High_Score = true;
+        }
+
+        GameOverScript gameOver = FindObjectOfType<GameOverScript>();
+        if (gameOver != null)
+        {
+            gameOver.Show(Celebrate_High_Score);
+        }
+
     }
 }    
