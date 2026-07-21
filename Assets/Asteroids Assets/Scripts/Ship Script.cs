@@ -5,6 +5,7 @@ public class ShipScript : MonoBehaviour
     public AudioSource Retro_Funk;
     public AudioSource Ship_Damage;
     public AudioSource Ship_Turn;
+    public AudioSource Ship_Thrust;
     public float Firing_Rate = 0.33f;
     public float Engine_Power = 10f;
     public float Turn_Power = -10f;
@@ -44,14 +45,41 @@ public class ShipScript : MonoBehaviour
         {
             Vector2 Thrust = transform.up * Engine_Power * Time.deltaTime * amount;
             rb2D.AddForce(Thrust);
+
+            if (Ship_Thrust.isPlaying == false)
+            {
+                Ship_Thrust.Play();
+
+            }
+        }
+        else
+        {
+            if (Ship_Thrust.isPlaying == true)
+            {
+                Ship_Thrust.Stop();
+            }
         }
     }
+    
 
     private void Apply_Torque(float amount)
     {
         float Torque = amount * Turn_Power * Time.deltaTime;
         rb2D.AddTorque(Torque);
-        Ship_Turn.Play();
+        if (Ship_Turn.isPlaying == true)
+        {
+            if(amount == 0)
+            {
+                Ship_Turn.Stop();
+            }
+        }
+        if (Ship_Turn.isPlaying == false)
+        {
+            if (amount != 0)
+            {
+                Ship_Turn.Play();
+            }
+        }
     }
 
     public void Take_Damage(float damage)
