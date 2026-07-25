@@ -113,7 +113,7 @@ public class ShipScript : MonoBehaviour
     // Triggers when called
     private void Update_Firing()
     {
-        bool Is_Firing = Input.GetButton("Fire");
+        bool Is_Firing = Input.GetButton("Fire1");
         Fire_Timer = Fire_Timer - Time.deltaTime;
         if (Is_Firing && Fire_Timer <= 0f)
         {
