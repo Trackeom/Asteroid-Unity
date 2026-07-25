@@ -19,7 +19,10 @@ public class BulletScript : MonoBehaviour
 
     public void OnTriggerEnter2D(Collider2D trigger)
     {
+        // When Bullet Touches Meteor find Meteor
         MeteorScript Meteor = trigger.gameObject.GetComponent<MeteorScript>();
+
+        // If Meteor is found call (Take_Damage or Explode)
         if (Meteor != null)
         {
             Meteor.Take_Damage(Collition_Damage);
@@ -28,9 +31,10 @@ public class BulletScript : MonoBehaviour
     }
 
     
-
+    // Triggers when called
     public void Explode()
     {
+        // Spawn (Explotion_Ref) at Meteor location then destroy itself
         Instantiate(Explosion_Ref, transform.position, transform.rotation);
         Destroy(gameObject);
     }

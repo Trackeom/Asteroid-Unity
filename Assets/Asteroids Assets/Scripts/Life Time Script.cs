@@ -14,10 +14,11 @@ public class LifeTimeScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // Time is ingame time
         Timer += Time.deltaTime;
         if (Timer >= Life_Time)
         {
-
+            // Destroy host
             Destroy(gameObject);
         }
     }

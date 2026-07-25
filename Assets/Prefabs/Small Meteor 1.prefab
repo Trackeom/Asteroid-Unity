@@ -208,3 +208,4 @@ MonoBehaviour:
   Max_Chunks: 3
   Explosion_Dist: 0.5
   Explosion_Force: 10
+  Score_Value: 10

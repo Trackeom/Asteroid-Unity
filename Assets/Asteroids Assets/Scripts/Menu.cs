@@ -3,25 +3,17 @@ using UnityEngine;
 
 public class Menu : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
+    // Called when UI Button Back is pressed
     public void Click_To_Play()
     {
+        // Load level (Play)
         SceneManager.LoadScene("Play");
     }
 
+    // Called when UI Button Back is pressed
     public void Click_To_Quit()
     {
+        // Set Play mode to Pause
         UnityEditor.EditorApplication.isPlaying = false;
     }
 }

@@ -110,9 +110,10 @@ public class ShipScript : MonoBehaviour
         rb.AddForce(Force);
     }
 
+    // Triggers when called
     private void Update_Firing()
     {
-        bool Is_Firing = Input.GetButton("Fire1");
+        bool Is_Firing = Input.GetButton("Fire");
         Fire_Timer = Fire_Timer - Time.deltaTime;
         if (Is_Firing && Fire_Timer <= 0f)
         {
@@ -121,9 +122,9 @@ public class ShipScript : MonoBehaviour
         }
     }
 
-        public int Get_High_Score()
+    public int Get_High_Score()
     {
-        return PlayerPrefs.GetInt("High Score", 0);
+    return PlayerPrefs.GetInt("High Score", 0);
     }
 
     public void Set_High_Score(int score)
@@ -131,8 +132,10 @@ public class ShipScript : MonoBehaviour
         PlayerPrefs.SetInt("High Score", score);
     }
 
+    // Triggers when called
     public void Game_Over()
     {
+        // If 
         bool Celebrate_High_Score = false;
         if (Score > Get_High_Score())
         {

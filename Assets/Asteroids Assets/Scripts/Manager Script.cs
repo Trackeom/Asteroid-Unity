@@ -9,9 +9,10 @@ public class ManagerScript : MonoBehaviour
     public int Spawn_Threshold =10;
 
     private float Check_Timer = 0;
-
+    // Update is called once per frame
     void Update()
     {
+
         Check_Timer += Time.deltaTime;
         if (Check_Timer > Check_Interval)
         {
@@ -25,6 +26,7 @@ public class ManagerScript : MonoBehaviour
         }
     }
 
+    // Triggers when called
     public void Spawn_New_Meteor()
     {
         int Meteor_Index = Random.Range(0, Meteor_Refs.Length);

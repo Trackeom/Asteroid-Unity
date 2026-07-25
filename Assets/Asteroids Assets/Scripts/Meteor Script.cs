@@ -14,7 +14,7 @@ public class MeteorScript : MonoBehaviour
     public float Explosion_Dist = 0.5f;
     public float Explosion_Force = 10f;
     public int Score_Value = 10;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+
     void Start()
     {
 
@@ -29,6 +29,7 @@ public class MeteorScript : MonoBehaviour
     public void OnCollisionEnter2D(Collision2D Collision)
     {
         ShipScript Ship = Collision.gameObject.GetComponent<ShipScript>();
+       
         if (Ship != null)
         {
             Ship.Take_Damage(Collision_Damage);
@@ -48,6 +49,11 @@ public class MeteorScript : MonoBehaviour
 
     public void Explode()
     {
+        ShipScript ship = FindObjectOfType<ShipScript>();
+        if (ship != null)
+        {
+            ship.Score += Score_Value;
+        }
         if (Meteor_Chunks.Length > 0)
         {
             int Meteor_Chunks = Random.Range(Min_Chunks, Max_Chunks);
@@ -56,11 +62,7 @@ public class MeteorScript : MonoBehaviour
             {
                 Create_Meteor_Chunk();
             }
-            ShipScript ship = FindObjectOfType<ShipScript>();
-            if (ship != null)
-            {
-                ship.Score += Score_Value;
-            }
+            
         }
 
         Instantiate(Explosion_Ref, transform.position, transform.rotation);

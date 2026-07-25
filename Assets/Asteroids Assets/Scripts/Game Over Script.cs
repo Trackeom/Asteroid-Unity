@@ -12,6 +12,7 @@ public class GameOverScript : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        // Once Ship is found call hide
         Ship = FindObjectOfType<ShipScript>();
         Hide();
     }
@@ -22,6 +23,7 @@ public class GameOverScript : MonoBehaviour
         
     }
 
+
     public void Show (bool Celebrate_High_Score)
     {
         Score_Text_Box.text = Ship.Score.ToString();
@@ -31,18 +33,24 @@ public class GameOverScript : MonoBehaviour
         Celebrate.SetActive(Celebrate_High_Score);
     }
 
+    // Triggers when called
     public void Hide()
     {
+        // Hide yourself
         Score_Panel.SetActive (false);
     }
 
+    // Called when UI Button Try Again is pressed
     public void Press_Try_Again()
     {
+        // Load Game level
         SceneManager.LoadScene("Play");
     }
 
+    // Called when UI Button Back is pressed
     public void Press_Back()
     {
+        // Load Menu level
         SceneManager.LoadScene("Menu");
     }
 }
