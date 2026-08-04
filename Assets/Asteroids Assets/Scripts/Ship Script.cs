@@ -7,18 +7,23 @@ public class ShipScript : MonoBehaviour
     public AudioSource Ship_Turn;
     public AudioSource Ship_Thrust;
     public float Firing_Rate = 0.33f;
+    public float Bigger_Firing_Rate = 10f;
     public float Engine_Power = 10f;
     public float Turn_Power = -10f;
     public float Max_HP = 3f;
     public float Current_HP;
     public GameObject Bullet_Ref;
     public float Bullet_Speed = 100f;
+    public GameObject Bigger_Bullet_Ref;
+    public float Bigger_Bullet_Speed = 150f;
     public GameObject Explosion_Ref;
     public ScreenFlash Flash;
     public int Score = 0;
+    public float Teleport = 0;
 
     private Rigidbody2D rb2D;
     private float Fire_Timer = 0f;
+    public float Bigger_Fire_Timer = 0f;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -37,6 +42,8 @@ public class ShipScript : MonoBehaviour
         float V = Input.GetAxis("Vertical");
         Apply_Thrust(V);
         Apply_Torque(H);
+
+        Update_Bigger_Firing();
     }
 
     private void Apply_Thrust(float amount)
@@ -110,6 +117,14 @@ public class ShipScript : MonoBehaviour
         rb.AddForce(Force);
     }
 
+    public void Fire_Bigger_Bullet()
+    {
+        GameObject BiggerBullet = Instantiate(Bigger_Bullet_Ref, transform.position, transform.rotation);
+        Rigidbody2D rb = BiggerBullet.GetComponent<Rigidbody2D>();
+        Vector2 Force = transform.up * Bigger_Bullet_Speed;
+        rb.AddForce(Force);
+    }
+
     // Triggers when called
     private void Update_Firing()
     {
@@ -119,6 +134,17 @@ public class ShipScript : MonoBehaviour
         {
             Fire_Bullet();
             Fire_Timer = Firing_Rate;
+        }
+    }
+
+    private void Update_Bigger_Firing()
+    {
+        bool spacebar = Input.GetKey(KeyCode.Space);
+        Bigger_Fire_Timer = Bigger_Fire_Timer - Time.deltaTime;
+        if (spacebar == true && Bigger_Fire_Timer <= 0)
+        {
+            Fire_Bigger_Bullet();
+            Bigger_Fire_Timer = Bigger_Firing_Rate;
         }
     }
 

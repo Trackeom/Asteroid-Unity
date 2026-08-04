@@ -1,7 +1,7 @@
 using UnityEngine.SceneManagement;
 using UnityEngine;
 
-public class Menu : MonoBehaviour
+public class MainMenu : MonoBehaviour
 {
     // Called when UI Button Back is pressed
     public void Click_To_Play()
