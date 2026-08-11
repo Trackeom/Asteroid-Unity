@@ -52,7 +52,7 @@ public class MeteorScript : MonoBehaviour
         ShipScript ship = FindObjectOfType<ShipScript>();
         if (ship != null)
         {
-            ship.Score += Score_Value;
+            ship.IncreaseScore(Score_Value);
         }
         if (Meteor_Chunks.Length > 0)
         {

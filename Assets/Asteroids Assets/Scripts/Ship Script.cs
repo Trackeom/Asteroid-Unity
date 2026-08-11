@@ -18,16 +18,22 @@ public class ShipScript : MonoBehaviour
     public float Bigger_Bullet_Speed = 150f;
     public GameObject Explosion_Ref;
     public ScreenFlash Flash;
-    public int Score = 0;
     public float Teleport = 0;
-
+    public int Extra_Life = 0;
+    public float Bigger_Fire_Timer = 0f;
+    
+    
     private Rigidbody2D rb2D;
     private float Fire_Timer = 0f;
-    public float Bigger_Fire_Timer = 0f;
+    private int Score = 0;
+    private int ELScore = 0;
+
+    const int SCORE_FOR_LIFE = 1000;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+
         Current_HP = Max_HP;
         rb2D = GetComponent<Rigidbody2D>();
         Retro_Funk.Play();
@@ -56,7 +62,6 @@ public class ShipScript : MonoBehaviour
             if (Ship_Thrust.isPlaying == false)
             {
                 Ship_Thrust.Play();
-
             }
         }
         else
@@ -94,7 +99,16 @@ public class ShipScript : MonoBehaviour
         Current_HP = Current_HP - damage;
         if (Current_HP <= 0f)
         {
-            Explode();
+            if (Extra_Life > 0)
+            {
+                Instantiate(Explosion_Ref, transform.position, transform.rotation);
+                Extra_Life = Extra_Life - 1;
+                Current_HP = Max_HP;
+            }
+            else
+            {
+                Explode();
+            }
         }
         Ship_Damage.Play();
         StartCoroutine(Flash.Flash_Routine());
@@ -175,5 +189,28 @@ public class ShipScript : MonoBehaviour
             gameOver.Show(Celebrate_High_Score);
         }
 
+    }
+
+    public int GetELScore()
+    {
+        return ELScore;
+    // if EL_score is greager than 1000 then add +1 to Extra Life 
+    }
+
+    public  void IncreaseScore(int addScore)
+    {
+        Score = Score + addScore;
+        ELScore = ELScore + addScore;
+
+        if(ELScore >= SCORE_FOR_LIFE)
+        {
+            ELScore = 0;
+            Extra_Life = Extra_Life + 1;
+        }
+    }
+
+    public int GetScore()
+    {
+        return Score;
     }
 }    

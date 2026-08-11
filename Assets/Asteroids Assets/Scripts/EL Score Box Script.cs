@@ -1,13 +1,12 @@
 using TMPro;
 using UnityEngine;
 
-public class ScoreBoxScript : MonoBehaviour
+public class ELScoreBoxScript : MonoBehaviour
 {
-    public TMP_Text Score_Text_Box;
-    public GameObject Score_Panel;
+    public TMP_Text ELScore_Text_Box;
+    public GameObject ELScore_Panel;
 
     private ShipScript Ship;
-
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -19,7 +18,7 @@ public class ScoreBoxScript : MonoBehaviour
     {
         if (Ship != null)
         {
-            Score_Text_Box.text = Ship.GetScore().ToString();
+            ELScore_Text_Box.text = "+  " + Ship.Extra_Life.ToString();
         }
     }
 }

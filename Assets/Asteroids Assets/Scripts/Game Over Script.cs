@@ -26,7 +26,7 @@ public class GameOverScript : MonoBehaviour
 
     public void Show (bool Celebrate_High_Score)
     {
-        Score_Text_Box.text = Ship.Score.ToString();
+        Score_Text_Box.text = Ship.GetScore().ToString();
         High_Score_Text_Box.text = Ship.Get_High_Score().ToString();
 
         Score_Panel.SetActive (true);
