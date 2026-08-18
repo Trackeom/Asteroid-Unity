@@ -77,13 +77,12 @@ public class ShipScript : MonoBehaviour
     void Update()
     {
         Update_Firing();
+        Update_Bigger_Firing();
 
         float H = Input.GetAxis("Horizontal");
         float V = Input.GetAxis("Vertical");
         Apply_Thrust(V);
         Apply_Torque(H);
-
-        Update_Bigger_Firing();
     }
 
     private void Apply_Thrust(float amount)
@@ -246,10 +245,5 @@ public class ShipScript : MonoBehaviour
     public int GetScore()
     {
         return Score;
-    }
-
-    public void Track_Time()
-    {
-    
     }
 }    

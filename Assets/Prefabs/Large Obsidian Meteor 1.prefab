@@ -233,7 +233,7 @@ MonoBehaviour:
   Meteor_Origonal: {fileID: 3722381582396213371, guid: 41dfbfe8014e1ec49976062659b3cd63, type: 3}
   Explosion_Dist: 0.5
   Explosion_Force: 10
-  Score_Value: 10
+  Score_Value: 50
 --- !u!1 &5442818194607874400
 GameObject:
   m_ObjectHideFlags: 0

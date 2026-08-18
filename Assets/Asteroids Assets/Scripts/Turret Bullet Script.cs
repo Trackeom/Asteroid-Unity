@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class BulletScript : MonoBehaviour
+public class TurretBulletScript : MonoBehaviour
 {
     public float Collition_Damage = 1f;
     public GameObject Explosion_Ref;
@@ -38,12 +38,12 @@ public class BulletScript : MonoBehaviour
             Explode();
         }
         // When Bullet Touches Meteor find Meteor
-        AlienTurretScript AlienTurret = trigger.gameObject.GetComponent<AlienTurretScript>();
+        ShipScript Ship = trigger.gameObject.GetComponent<ShipScript>();
 
         // If Meteor is found call (Take_Damage or Explode)
-        if (AlienTurret != null)
+        if (Ship != null)
         {
-            AlienTurret.Take_Damage(Collition_Damage);
+            Ship.Take_Damage(Collition_Damage);
             Explode();
         }
     }

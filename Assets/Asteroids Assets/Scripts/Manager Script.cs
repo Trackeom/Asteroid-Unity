@@ -1,27 +1,32 @@
 using System.Collections;
 using System.Runtime.CompilerServices;
 using UnityEngine;
+using static UnityEngine.GraphicsBuffer;
 
 public class ManagerScript : MonoBehaviour
 {
     public float Inaccuracy = 2f;
     public GameObject[] Meteor_Refs;
     public GameObject[] OMeteor_Refs;
-    bool Spawn_OMeteors = false;
+    public GameObject[] Turret_Refs;
+    public bool Spawn_OMeteors = false;
+    public bool Spawn_Turret = false;
 
     public float Check_Interval = 3f;
     public float Push_Force = 100f;
     public int Spawn_Meteor_Threshold =10; //how many metoers on the screen (based on MetorScript.SpawnValue
     public int Spawn_OMeteor_Threshold = 10; //how many Ometoers on the screen (based on ObsidianMetorScript.SpawnValue
+    public int Spawn_Turret_Threshold = 10;
 
     private float Check_Timer = 0;
     IEnumerator MeteorIncreaser()
     {
-        yield return new WaitForSeconds(60);
+        yield return new WaitForSeconds(1);
         Spawn_Meteor_Threshold = Spawn_Meteor_Threshold * 2;
-        yield return new WaitForSeconds(60);
+        yield return new WaitForSeconds(1);
         Spawn_OMeteors = true;
-        yield return new WaitForSeconds(60);
+        yield return new WaitForSeconds(1);
+        Spawn_Turret = true;
     }
 
 
@@ -55,13 +60,21 @@ public class ManagerScript : MonoBehaviour
                 {
                     Spawn_New_Meteor();
                 }
-                if(Spawn_OMeteors == true)
+                if (Spawn_OMeteors == true)
                 {
                     if (Total_OMeteor_Value() < Spawn_OMeteor_Threshold)
                     {
                         Spawn_New_OMeteor();
                     }
                 }
+                if (Spawn_Turret == true)
+                {
+                    if (Total_Turret_Value() < Spawn_Turret_Threshold)
+                    {
+                        Spawn_New_Turret();
+                    }
+                }
+                
             }
         }
     }
@@ -108,6 +121,27 @@ public class ManagerScript : MonoBehaviour
         for (int n = 0; n < OMeteors.Length; n++)
         {
             value += OMeteors[n].Spawn_Value;
+        }
+        return value;
+    }
+    public void Spawn_New_Turret()
+    {
+        int Turret_Index = Random.Range(0, Turret_Refs.Length);
+        GameObject Turret_Ref = Turret_Refs[Turret_Index];
+        Vector3 Spawn_Point = OffScreenSpawnPoint();
+        GameObject Turrets = Instantiate(Turret_Ref, Spawn_Point, transform.rotation);
+        //Vector2 force = PushDirection(Spawn_Point) * Push_Force;
+        //Rigidbody2D rb = Turrets.GetComponent<Rigidbody2D>();
+        //rb.AddForce(force);
+    }
+
+    public int Total_Turret_Value()
+    {
+        AlienTurretScript[] Turret = FindObjectsByType<AlienTurretScript>(FindObjectsSortMode.None);
+        int value = 0;
+        for (int n = 0; n < Turret.Length; n++)
+        {
+            value += Turret[n].Spawn_Value;
         }
         return value;
     }

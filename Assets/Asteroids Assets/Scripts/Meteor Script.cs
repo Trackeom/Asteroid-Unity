@@ -64,7 +64,6 @@ public class MeteorScript : MonoBehaviour
             }
             
         }
-
         Instantiate(Explosion_Ref, transform.position, transform.rotation);
         Destroy(gameObject);
     }

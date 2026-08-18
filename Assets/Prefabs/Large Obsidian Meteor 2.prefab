@@ -320,4 +320,4 @@ MonoBehaviour:
   Meteor_Origonal: {fileID: 3722381582396213371, guid: aafd3bdcdf41d3c45aaee04290350ea4, type: 3}
   Explosion_Dist: 0.5
   Explosion_Force: 10
-  Score_Value: 10
+  Score_Value: 50
