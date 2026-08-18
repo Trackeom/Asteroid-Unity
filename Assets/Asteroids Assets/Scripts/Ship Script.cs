@@ -23,7 +23,11 @@ public class ShipScript : MonoBehaviour
     public int Extra_Life = 0;
     public float Bigger_Fire_Timer = 0f;
 
-    public int Life_Time = 0;
+    public int Life_Time_Seconds = 0;
+    public int Life_Time_Minutes = 0;
+    public int Life_Time_Hours = 0;
+    public int Life_Time_Days = 0;
+    public int Too_Much_Life_Time = 0;
     private Rigidbody2D rb2D;
     private float Fire_Timer = 0f;
     private int Score = 0;
@@ -34,7 +38,7 @@ public class ShipScript : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        StartCoroutine(SimpleTime());
+        StartCoroutine (SimpleTime());
         Current_HP = Max_HP;
         rb2D = GetComponent<Rigidbody2D>();
         Retro_Funk.Play();
@@ -45,7 +49,27 @@ public class ShipScript : MonoBehaviour
         while (true)
         {
             yield return new WaitForSeconds(1f);
-            Life_Time = Life_Time + 1;
+            Life_Time_Seconds = Life_Time_Seconds + 1;
+            if (Life_Time_Seconds > 60)
+            {
+                Life_Time_Seconds = 0;
+                Life_Time_Minutes += 1;
+
+                if (Life_Time_Minutes > 60)
+                {  
+                    Life_Time_Minutes = 0;
+                    Life_Time_Hours += 1;
+
+                    if (Life_Time_Hours > 24)
+                    {
+                        Life_Time_Hours = 0;
+                        Life_Time_Days += 1;
+
+//                      DO NOT STAY UP FOR DAYS I BEG YOU
+
+                    }
+                }
+            }
         }
     }
 
@@ -174,7 +198,7 @@ public class ShipScript : MonoBehaviour
 
     public int Get_High_Score()
     {
-    return PlayerPrefs.GetInt("High Score", 0);
+        return PlayerPrefs.GetInt("High Score", 0);
     }
 
     public void Set_High_Score(int score)

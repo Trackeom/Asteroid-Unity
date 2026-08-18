@@ -1,7 +1,7 @@
 using TMPro;
 using UnityEngine;
 
-public class LifeTimeTrackerScript : MonoBehaviour
+public class LifeTimeHoursTrackerScript : MonoBehaviour
 {
     public TMP_Text Time_Text_Box;
     public GameObject Time_Panel;
@@ -19,7 +19,7 @@ public class LifeTimeTrackerScript : MonoBehaviour
     {
         if (Ship != null)
         {
-            Time_Text_Box.text = Ship.Life_Time.ToString();
+            Time_Text_Box.text = ":  " + Ship.Life_Time_Hours.ToString();
         }
     }
 }

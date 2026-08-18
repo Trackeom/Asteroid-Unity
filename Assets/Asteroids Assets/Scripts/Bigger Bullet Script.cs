@@ -22,6 +22,8 @@ public class BiggerBulletScript : MonoBehaviour
     public void Take_Damage(float damage)
     {
         Current_HP = Current_HP - damage;
+        Instantiate (Explosion_Ref, transform.position, transform.rotation);
+
         if (Current_HP <= 0f)
         {
             Explode();

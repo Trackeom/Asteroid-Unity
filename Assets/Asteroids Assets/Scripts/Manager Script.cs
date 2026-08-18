@@ -7,7 +7,7 @@ public class ManagerScript : MonoBehaviour
     public float Inaccuracy = 2f;
     public GameObject[] Meteor_Refs;
     public GameObject[] OMeteor_Refs;
-    bool canSpawnOMeteors = false;
+    bool Spawn_OMeteors = false;
 
     public float Check_Interval = 3f;
     public float Push_Force = 100f;
@@ -17,10 +17,11 @@ public class ManagerScript : MonoBehaviour
     private float Check_Timer = 0;
     IEnumerator MeteorIncreaser()
     {
-        yield return new WaitForSeconds(30);
+        yield return new WaitForSeconds(60);
         Spawn_Meteor_Threshold = Spawn_Meteor_Threshold * 2;
-        yield return new WaitForSeconds(30);
-        canSpawnOMeteors = true;
+        yield return new WaitForSeconds(60);
+        Spawn_OMeteors = true;
+        yield return new WaitForSeconds(60);
     }
 
 
@@ -54,7 +55,7 @@ public class ManagerScript : MonoBehaviour
                 {
                     Spawn_New_Meteor();
                 }
-                if(canSpawnOMeteors == true)
+                if(Spawn_OMeteors == true)
                 {
                     if (Total_OMeteor_Value() < Spawn_OMeteor_Threshold)
                     {
