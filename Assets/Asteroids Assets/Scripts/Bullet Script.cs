@@ -28,6 +28,15 @@ public class BulletScript : MonoBehaviour
             Meteor.Take_Damage(Collition_Damage);
             Explode();
         }
+        // When Bullet Touches Meteor find Meteor
+        ObsidianMeteorScript OMeteor = trigger.gameObject.GetComponent<ObsidianMeteorScript>();
+
+        // If Meteor is found call (Take_Damage or Explode)
+        if (OMeteor != null)
+        {
+            OMeteor.Take_Damage(Collition_Damage);
+            Explode();
+        }
     }
 
     

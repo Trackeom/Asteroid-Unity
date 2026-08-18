@@ -1,0 +1,67 @@
+using JetBrains.Annotations;
+using UnityEngine;
+
+public class ObsidianMeteorScript : MonoBehaviour
+{
+    public int Spawn_Value = 5;
+    public float Max_HP = 1f;
+    public float Current_HP;
+    public float Collision_Damage = 1f;
+    public GameObject Explosion_Ref1;
+    public GameObject Explosion_Ref2;
+    public GameObject Meteor_Origonal;
+    public float Explosion_Dist = 0.5f;
+    public float Explosion_Force = 10f;
+    public int Score_Value = 10;
+
+    void Start()
+    {
+        Current_HP += Max_HP;
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+
+    }
+
+    public void OnCollisionEnter2D(Collision2D Collision)
+    {
+        ShipScript Ship = Collision.gameObject.GetComponent<ShipScript>();
+
+        if (Ship != null)
+        {
+            Ship.Take_Damage(Collision_Damage);
+        }
+    }
+
+
+    public void Take_Damage(float damage)
+    {
+        Current_HP = Current_HP - damage;
+
+        if (Current_HP <= 0f)
+        {
+            Explode();
+        }
+    }
+
+    public void Explode()
+    {
+        ShipScript ship = FindObjectOfType<ShipScript>();
+        if (ship != null)
+        {
+            ship.IncreaseScore(Score_Value);
+            Shed_Obsidian_Shell();
+        }
+
+        Instantiate(Explosion_Ref1, transform.position, transform.rotation);
+        Instantiate(Explosion_Ref2, transform.position, transform.rotation);
+        Destroy(gameObject);
+    }
+
+    private void Shed_Obsidian_Shell()
+    {
+        Instantiate(Meteor_Origonal, transform.position, transform.rotation);
+    }
+}

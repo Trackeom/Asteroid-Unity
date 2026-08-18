@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class ShipScript : MonoBehaviour
@@ -21,8 +22,8 @@ public class ShipScript : MonoBehaviour
     public float Teleport = 0;
     public int Extra_Life = 0;
     public float Bigger_Fire_Timer = 0f;
-    
-    
+
+    public int Life_Time = 0;
     private Rigidbody2D rb2D;
     private float Fire_Timer = 0f;
     private int Score = 0;
@@ -33,10 +34,19 @@ public class ShipScript : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-
+        StartCoroutine(SimpleTime());
         Current_HP = Max_HP;
         rb2D = GetComponent<Rigidbody2D>();
         Retro_Funk.Play();
+    }
+
+    IEnumerator SimpleTime()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(1f);
+            Life_Time = Life_Time + 1;
+        }
     }
 
     // Update is called once per frame
@@ -212,5 +222,10 @@ public class ShipScript : MonoBehaviour
     public int GetScore()
     {
         return Score;
+    }
+
+    public void Track_Time()
+    {
+    
     }
 }    
