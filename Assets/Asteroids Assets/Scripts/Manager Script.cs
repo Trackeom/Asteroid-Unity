@@ -14,9 +14,9 @@ public class ManagerScript : MonoBehaviour
 
     public float Check_Interval = 3f;
     public float Push_Force = 100f;
-    public int Spawn_Meteor_Threshold =10; //how many metoers on the screen (based on MetorScript.SpawnValue
+    public int Spawn_Meteor_Threshold = 5; //how many metoers on the screen (based on MetorScript.SpawnValue
     public int Spawn_OMeteor_Threshold = 10; //how many Ometoers on the screen (based on ObsidianMetorScript.SpawnValue
-    public int Spawn_Turret_Threshold = 10;
+    public int Spawn_Turret_Threshold = 15;
 
     private float Check_Timer = 0;
     IEnumerator MeteorIncreaser()

@@ -192,7 +192,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24e6b37b5b8f53042af1db3f87a6efe8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Spawn_Value: 7
+  Spawn_Value: 10
   Fire_Timer: 1
   Bullet_Ref: {fileID: 5078401063653218294, guid: f3bb023c4dda081469f6fd044761eccf, type: 3}
   Bullet_Speed: 75
@@ -200,4 +200,7 @@ MonoBehaviour:
   Max_HP: 3
   Current_HP: 0
   Explosion_Ref: {fileID: 3345248609389438901, guid: 7764f9be368d6e14fb4831a944ebec3c, type: 3}
-  Score_Value: 10
+  Score_Value: 75
+  Timer: 0
+  Moving: 0
+  mySpriteRenderer: {fileID: 2223119091950658812}

@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class MeteorScript : MonoBehaviour
 {
-    public int Spawn_Value = 3;
+    public int Spawn_Value = 5;
     public float Max_HP = 3f;
     public float Current_HP;
     public float Collision_Damage = 1f;

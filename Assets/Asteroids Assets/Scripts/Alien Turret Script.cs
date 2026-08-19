@@ -12,29 +12,43 @@ public class AlienTurretScript : MonoBehaviour
     public float Current_HP;
     public GameObject Explosion_Ref;
     public int Score_Value = 75;
+    public float Timer = 0f;
+    public bool Moving;
     ShipScript Player;
+    public SpriteRenderer mySpriteRenderer;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        Timer = Time.deltaTime;
         Current_HP = Max_HP;
         Player = FindObjectOfType<ShipScript>();
 
-        StartCoroutine(MoveMe());
+        StartCoroutine (Move_To_Target());
     }
 
-    IEnumerator MoveMe()
+    IEnumerator Move_To_Target()
     {
-        while (true)
+        while (mySpriteRenderer.isVisible == false)
         {
-            yield return new WaitForSeconds(5f);
-            for (int x = 0; x < 100; x++)
+            if (Player != null)
             {
-                if (Player != null)
-                {
-                    transform.position = Vector3.Lerp(transform.position, Player.transform.position, Time.deltaTime);
-                }
-                yield return new WaitForEndOfFrame();
+                transform.position = Vector3.Lerp(transform.position, Player.transform.position, Time.deltaTime);
             }
+            yield return new WaitForEndOfFrame();
+        }
+
+        yield return new WaitForSeconds(1); //wait onscreen and look at the player before moving
+
+        float deltaTime = 0;
+        while(deltaTime < 0.5) //how many seconds to move towards the player
+        {
+            deltaTime += Time.deltaTime;
+            if (Player != null)
+            {
+                transform.position = Vector3.Lerp(transform.position, Player.transform.position, Time.deltaTime);
+            }
+            yield return new WaitForEndOfFrame();
         }
     }
 
