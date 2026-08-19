@@ -58,16 +58,19 @@ public class ObsidianMeteorScript : MonoBehaviour
         Spawn_Meteor_Origonal();
         Instantiate(Explosion_Ref1, transform.position, transform.rotation);
         Instantiate(Explosion_Ref2, transform.position, transform.rotation);
+        Instantiate(Meteor_Origonal_Ref, transform.position, transform.rotation);
+        Instantiate(Bigger_Power_Up_Ref, transform.position, transform.rotation);
         Destroy(gameObject);
     }
 
     private void Spawn_Meteor_Origonal()
     {
-        Instantiate(Meteor_Origonal_Ref, transform.position, transform.rotation);
-        Instantiate(Bigger_Power_Up_Ref, transform.position, transform.rotation);
-        //if (Random.Range(0, 10) == 5)
-        {
-            //Instantiate(Bigger_Power_Up_Ref, transform.position, transform.rotation);
-        }
+
+       
     }
+
+//if (Random.Range(0, 10) == 5)
+//      {
+            //Instantiate(Bigger_Power_Up_Ref, transform.position, transform.rotation);
+//      }
 }

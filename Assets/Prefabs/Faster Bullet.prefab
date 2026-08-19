@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: -5607589262374865909}
   - component: {fileID: -4072056869797759921}
   - component: {fileID: 867742076343744650}
-  - component: {fileID: -1489290541035702065}
+  - component: {fileID: 4032102174949719366}
   m_Layer: 0
   m_Name: Faster Bullet
   m_TagString: Untagged
@@ -278,7 +278,7 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &-1489290541035702065
+--- !u!114 &4032102174949719366
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -287,8 +287,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 5078401063653218294}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e62610b76e5aa894a92a767d8773648c, type: 3}
+  m_Script: {fileID: 11500000, guid: 52b38b27560c9444ca23298cd03e19f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Collition_Damage: 1
-  Explosion_Ref: {fileID: 0}
+  Explosion_Ref: {fileID: 3345248609389438901, guid: 7764f9be368d6e14fb4831a944ebec3c, type: 3}

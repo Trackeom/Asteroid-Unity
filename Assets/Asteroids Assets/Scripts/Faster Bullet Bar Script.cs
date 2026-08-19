@@ -2,7 +2,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class BiggerBulletBarScript : MonoBehaviour
+public class FasterBulletBarScript : MonoBehaviour
 {
     public Slider BB_Slider;
 
@@ -19,7 +19,7 @@ public class BiggerBulletBarScript : MonoBehaviour
     {
         if (Ship != null)
         {
-            BB_Slider.value = 1 - Ship.Big_Count_Down / Ship.Bigger_Firing_Rate;
+            BB_Slider.value = 1 - Ship.Fast_Count_Down / Ship.Bigger_Firing_Rate;
         }
     }
 }

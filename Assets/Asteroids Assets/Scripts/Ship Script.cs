@@ -20,17 +20,18 @@ public class ShipScript : MonoBehaviour
     public GameObject Bigger_Bullet_Ref;
     public GameObject Faster_Bullet_Ref;
     public float Bigger_Bullet_Speed = 150f;
-    public float Faster_Bullet_Speed;
+    public float Faster_Bullet_Speed = 200;
     public GameObject Explosion_Ref;
     public ScreenFlash Flash;
     public float Teleport = 0;
     public int Extra_Life = 0;
     public float Bigger_Fire_Timer = 0f;
     public float Faster_Fire_Timer = 0f;
+    public float Fast_Count_Down = 0;
+    public float Big_Count_Down = 0;
     public bool Fast_Power_Up = false;
     public bool Big_Power_Up = false;
     public bool Default_Form = true;
-
 //  
     public int Life_Time_Seconds = 0;
     public int Life_Time_Minutes = 0;
@@ -39,8 +40,6 @@ public class ShipScript : MonoBehaviour
     private Rigidbody2D rb2D;
     private SpriteRenderer Ship_Skin;
     private float Fire_Timer = 0f;
-    private int Fire_Big_Power_Up = 0;
-    private int Fire_Fast_Power_Up = 0;
     private int Score = 0;
     private int ELScore = 0;
 
@@ -49,6 +48,8 @@ public class ShipScript : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        Bigger_Fire_Timer =+ Time.deltaTime;
+        Faster_Fire_Timer =+ Time.deltaTime;
         StartCoroutine(SimpleTime());
         Current_HP = Max_HP;
         rb2D = GetComponent<Rigidbody2D>();
@@ -76,7 +77,9 @@ public class ShipScript : MonoBehaviour
                         Life_Time_Hours = 0;
                         Life_Time_Days += 1;
 
-                        //                      DO NOT STAY UP FOR DAYS I BEG YOU
+//                      ( - DECORATION USE ONLY - )
+
+//                      DO NOT STAY UP FOR DAYS I BEG YOU
 
                     }
                 }
@@ -96,7 +99,6 @@ public class ShipScript : MonoBehaviour
         
         if (Big_Power_Up == true)
         {
-            Fire_Big_Power_Up =+ 1;
             Update_Bigger_Firing();
             Ship_Skin = GetComponent<SpriteRenderer>();
             Ship_Skin.color = Color.yellow;
@@ -104,7 +106,6 @@ public class ShipScript : MonoBehaviour
 
         if (Fast_Power_Up == true)
         {
-            Fire_Fast_Power_Up =+ 1;
             Update_Faster_Firing();
             Ship_Skin = GetComponent<SpriteRenderer>();
             Ship_Skin.color = Color.lightBlue;
@@ -200,8 +201,6 @@ public class ShipScript : MonoBehaviour
         Rigidbody2D rb = Faster_Bullet.GetComponent<Rigidbody2D>();
         Vector2 Force = transform.up * Faster_Bullet_Speed;
         rb.AddForce(Force);
-        
-
     }
 
     public void Fire_Big_Bullet()
@@ -210,8 +209,6 @@ public class ShipScript : MonoBehaviour
         Rigidbody2D rb = Bigger_Bullet.GetComponent<Rigidbody2D>();
         Vector2 Force = transform.up * Bigger_Bullet_Speed;
         rb.AddForce(Force);
-
-
     }
 
     // Triggers when called
@@ -236,7 +233,7 @@ public class ShipScript : MonoBehaviour
             Bigger_Fire_Timer = Bigger_Firing_Rate;
         }
 
-        if (Fire_Big_Power_Up == 0)
+        if (Bigger_Fire_Timer == 0)
         {
             Big_Power_Up = false;
             Ship_Skin = GetComponent<SpriteRenderer>();
@@ -255,7 +252,7 @@ public class ShipScript : MonoBehaviour
             Faster_Fire_Timer = Faster_Firing_Rate;
         }
         
-        if (Fire_Fast_Power_Up == 0)
+        if (Faster_Fire_Timer == 0)
         {
             Fast_Power_Up = false;
             Ship_Skin = GetComponent<SpriteRenderer>();
@@ -318,17 +315,19 @@ public class ShipScript : MonoBehaviour
 
     public void OnCollisionEnter2D(Collision2D Collision)
     {
-        if (Collision.gameObject.CompareTag("Big_Power_Up"))
+        if (Collision.gameObject.CompareTag("Big Power Up"))
         {
             Big_Power_Up = true;
             Default_Form = false;
+            Big_Count_Down += 10;
             Destroy(Collision.gameObject);
         }
         
-        if (Collision.gameObject.CompareTag("Fast_Power_Up"))
+        if (Collision.gameObject.CompareTag("Fast Power Up"))
         {
             Fast_Power_Up = true;
             Default_Form = false;
+            Fast_Count_Down += 10;
             Destroy(Collision.gameObject);
         }
     }

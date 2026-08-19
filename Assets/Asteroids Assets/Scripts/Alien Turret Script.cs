@@ -95,13 +95,15 @@ public class AlienTurretScript : MonoBehaviour
     }
     public void Explode()
     {
+        Instantiate(Explosion_Ref, transform.position, transform.rotation);
+        Instantiate(Faster_Power_Up_Ref, transform.position, transform.rotation);
         ShipScript ship = FindObjectOfType<ShipScript>();
+
         if (ship != null)
         {
             ship.IncreaseScore(Score_Value);
         }
-    Instantiate(Explosion_Ref, transform.position, transform.rotation);
-    Instantiate(Faster_Power_Up_Ref, transform.position, transform.rotation);
-    Destroy(gameObject);
+
+        Destroy(gameObject);
     }
 }

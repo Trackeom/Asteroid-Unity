@@ -291,6 +291,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Collition_Damage: 1
-  Explosion_Ref: {fileID: 0}
+  Explosion_Ref: {fileID: 3345248609389438901, guid: 7764f9be368d6e14fb4831a944ebec3c, type: 3}
   Max_HP: 3
   Current_HP: 0
