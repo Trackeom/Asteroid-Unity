@@ -11,6 +11,7 @@ public class AlienTurretScript : MonoBehaviour
     public float Max_HP = 3f;
     public float Current_HP;
     public GameObject Explosion_Ref;
+    public GameObject Faster_Power_Up_Ref;
     public int Score_Value = 75;
     public float Timer = 0f;
     public bool Moving;
@@ -99,7 +100,8 @@ public class AlienTurretScript : MonoBehaviour
         {
             ship.IncreaseScore(Score_Value);
         }
-        Instantiate(Explosion_Ref, transform.position, transform.rotation);
-        Destroy(gameObject);
+    Instantiate(Explosion_Ref, transform.position, transform.rotation);
+    Instantiate(Faster_Power_Up_Ref, transform.position, transform.rotation);
+    Destroy(gameObject);
     }
 }

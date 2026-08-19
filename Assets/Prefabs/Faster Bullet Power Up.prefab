@@ -13,10 +13,9 @@ GameObject:
   - component: {fileID: 5893996659181099783}
   - component: {fileID: 1664169568691563324}
   - component: {fileID: 6868826768466758979}
-  - component: {fileID: 8313965461121949458}
   m_Layer: 0
-  m_Name: Alien Turret
-  m_TagString: Untagged
+  m_Name: Faster Bullet Power Up
+  m_TagString: Fast Power Up
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -81,7 +80,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 7851470227991654557, guid: d73f8d1e154f0de49b396ad7edbd11f5, type: 3}
-  m_Color: {r: 1, g: 0, b: 0, a: 1}
+  m_Color: {r: 0, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -180,27 +179,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94a0eac4a4a1e584abbefde4bf831c18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &8313965461121949458
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6659421845409028692}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 24e6b37b5b8f53042af1db3f87a6efe8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Spawn_Value: 10
-  Fire_Timer: 1
-  Bullet_Ref: {fileID: 5078401063653218294, guid: f3bb023c4dda081469f6fd044761eccf, type: 3}
-  Bullet_Speed: 100
-  Collision_Damage: 1
-  Max_HP: 3
-  Current_HP: 0
-  Explosion_Ref: {fileID: 3345248609389438901, guid: 4ec9e481c83678541b582c67a6c993f8, type: 3}
-  Score_Value: 75
-  Timer: 0
-  Moving: 0
-  mySpriteRenderer: {fileID: 2223119091950658812}

@@ -9,7 +9,8 @@ public class ObsidianMeteorScript : MonoBehaviour
     public float Collision_Damage = 1f;
     public GameObject Explosion_Ref1;
     public GameObject Explosion_Ref2;
-    public GameObject Meteor_Origonal;
+    public GameObject Meteor_Origonal_Ref;
+    public GameObject Bigger_Power_Up_Ref;
     public float Explosion_Dist = 0.5f;
     public float Explosion_Force = 10f;
     public int Score_Value = 10;
@@ -52,16 +53,21 @@ public class ObsidianMeteorScript : MonoBehaviour
         if (ship != null)
         {
             ship.IncreaseScore(Score_Value);
-            Shed_Obsidian_Shell();
         }
 
+        Spawn_Meteor_Origonal();
         Instantiate(Explosion_Ref1, transform.position, transform.rotation);
         Instantiate(Explosion_Ref2, transform.position, transform.rotation);
         Destroy(gameObject);
     }
 
-    private void Shed_Obsidian_Shell()
+    private void Spawn_Meteor_Origonal()
     {
-        Instantiate(Meteor_Origonal, transform.position, transform.rotation);
+        Instantiate(Meteor_Origonal_Ref, transform.position, transform.rotation);
+        Instantiate(Bigger_Power_Up_Ref, transform.position, transform.rotation);
+        //if (Random.Range(0, 10) == 5)
+        {
+            //Instantiate(Bigger_Power_Up_Ref, transform.position, transform.rotation);
+        }
     }
 }

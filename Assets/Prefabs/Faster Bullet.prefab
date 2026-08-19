@@ -15,9 +15,9 @@ GameObject:
   - component: {fileID: -5607589262374865909}
   - component: {fileID: -4072056869797759921}
   - component: {fileID: 867742076343744650}
-  - component: {fileID: -3106134142310369850}
+  - component: {fileID: -1489290541035702065}
   m_Layer: 0
-  m_Name: Bigger Bullet
+  m_Name: Faster Bullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -33,7 +33,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -0.001, y: -0.002, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 1}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -83,7 +83,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 2208703988740019828, guid: 2575371759c835349aa3919adf0e763f, type: 3}
-  m_Color: {r: 1, g: 1, b: 0, a: 1}
+  m_Color: {r: 0, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -278,7 +278,7 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &-3106134142310369850
+--- !u!114 &-1489290541035702065
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -287,10 +287,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 5078401063653218294}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eae3bed9e83ece249bafe960b075840d, type: 3}
+  m_Script: {fileID: 11500000, guid: e62610b76e5aa894a92a767d8773648c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Collition_Damage: 1
   Explosion_Ref: {fileID: 0}
-  Max_HP: 3
-  Current_HP: 0

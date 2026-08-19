@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ShipScript : MonoBehaviour
 {
@@ -8,28 +9,38 @@ public class ShipScript : MonoBehaviour
     public AudioSource Ship_Turn;
     public AudioSource Ship_Thrust;
     public float Firing_Rate = 0.33f;
-    public float Bigger_Firing_Rate = 10f;
+    public float Bigger_Firing_Rate = 0.66f;
+    public float Faster_Firing_Rate = 0.1675f;
     public float Engine_Power = 10f;
     public float Turn_Power = -10f;
     public float Max_HP = 3f;
     public float Current_HP;
     public GameObject Bullet_Ref;
-    public float Bullet_Speed = 100f;
+    public float Bullet_Speed = 150f;
     public GameObject Bigger_Bullet_Ref;
+    public GameObject Faster_Bullet_Ref;
     public float Bigger_Bullet_Speed = 150f;
+    public float Faster_Bullet_Speed;
     public GameObject Explosion_Ref;
     public ScreenFlash Flash;
     public float Teleport = 0;
     public int Extra_Life = 0;
     public float Bigger_Fire_Timer = 0f;
+    public float Faster_Fire_Timer = 0f;
+    public bool Fast_Power_Up = false;
+    public bool Big_Power_Up = false;
+    public bool Default_Form = true;
 
+//  
     public int Life_Time_Seconds = 0;
     public int Life_Time_Minutes = 0;
     public int Life_Time_Hours = 0;
     public int Life_Time_Days = 0;
-    public int Too_Much_Life_Time = 0;
     private Rigidbody2D rb2D;
+    private SpriteRenderer Ship_Skin;
     private float Fire_Timer = 0f;
+    private int Fire_Big_Power_Up = 0;
+    private int Fire_Fast_Power_Up = 0;
     private int Score = 0;
     private int ELScore = 0;
 
@@ -38,7 +49,7 @@ public class ShipScript : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        StartCoroutine (SimpleTime());
+        StartCoroutine(SimpleTime());
         Current_HP = Max_HP;
         rb2D = GetComponent<Rigidbody2D>();
         Retro_Funk.Play();
@@ -56,7 +67,7 @@ public class ShipScript : MonoBehaviour
                 Life_Time_Minutes += 1;
 
                 if (Life_Time_Minutes > 60)
-                {  
+                {
                     Life_Time_Minutes = 0;
                     Life_Time_Hours += 1;
 
@@ -65,7 +76,7 @@ public class ShipScript : MonoBehaviour
                         Life_Time_Hours = 0;
                         Life_Time_Days += 1;
 
-//                      DO NOT STAY UP FOR DAYS I BEG YOU
+                        //                      DO NOT STAY UP FOR DAYS I BEG YOU
 
                     }
                 }
@@ -76,8 +87,28 @@ public class ShipScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Update_Firing();
-        Update_Bigger_Firing();
+        if (Default_Form == true)
+        {
+            Update_Firing();
+            Ship_Skin = GetComponent<SpriteRenderer>();
+            Ship_Skin.color = Color.white;
+        }
+        
+        if (Big_Power_Up == true)
+        {
+            Fire_Big_Power_Up =+ 1;
+            Update_Bigger_Firing();
+            Ship_Skin = GetComponent<SpriteRenderer>();
+            Ship_Skin.color = Color.yellow;
+        }
+
+        if (Fast_Power_Up == true)
+        {
+            Fire_Fast_Power_Up =+ 1;
+            Update_Faster_Firing();
+            Ship_Skin = GetComponent<SpriteRenderer>();
+            Ship_Skin.color = Color.lightBlue;
+        }
 
         float H = Input.GetAxis("Horizontal");
         float V = Input.GetAxis("Vertical");
@@ -105,7 +136,7 @@ public class ShipScript : MonoBehaviour
             }
         }
     }
-    
+
 
     private void Apply_Torque(float amount)
     {
@@ -113,7 +144,7 @@ public class ShipScript : MonoBehaviour
         rb2D.AddTorque(Torque);
         if (Ship_Turn.isPlaying == true)
         {
-            if(amount == 0)
+            if (amount == 0)
             {
                 Ship_Turn.Stop();
             }
@@ -163,13 +194,24 @@ public class ShipScript : MonoBehaviour
         Vector2 Force = transform.up * Bullet_Speed;
         rb.AddForce(Force);
     }
-
-    public void Fire_Bigger_Bullet()
+    public void Fire_Fast_Bullet()
     {
-        GameObject BiggerBullet = Instantiate(Bigger_Bullet_Ref, transform.position, transform.rotation);
-        Rigidbody2D rb = BiggerBullet.GetComponent<Rigidbody2D>();
+        GameObject Faster_Bullet = Instantiate(Faster_Bullet_Ref, transform.position, transform.rotation);
+        Rigidbody2D rb = Faster_Bullet.GetComponent<Rigidbody2D>();
+        Vector2 Force = transform.up * Faster_Bullet_Speed;
+        rb.AddForce(Force);
+        
+
+    }
+
+    public void Fire_Big_Bullet()
+    {
+        GameObject Bigger_Bullet = Instantiate(Bigger_Bullet_Ref, transform.position, transform.rotation);
+        Rigidbody2D rb = Bigger_Bullet.GetComponent<Rigidbody2D>();
         Vector2 Force = transform.up * Bigger_Bullet_Speed;
         rb.AddForce(Force);
+
+
     }
 
     // Triggers when called
@@ -186,12 +228,39 @@ public class ShipScript : MonoBehaviour
 
     private void Update_Bigger_Firing()
     {
-        bool spacebar = Input.GetKey(KeyCode.Space);
+        bool Is_Firing = Input.GetButton("Fire1");
         Bigger_Fire_Timer = Bigger_Fire_Timer - Time.deltaTime;
-        if (spacebar == true && Bigger_Fire_Timer <= 0)
+        if (Is_Firing == true && Bigger_Fire_Timer <= 0)
         {
-            Fire_Bigger_Bullet();
+            Fire_Big_Bullet();
             Bigger_Fire_Timer = Bigger_Firing_Rate;
+        }
+
+        if (Fire_Big_Power_Up == 0)
+        {
+            Big_Power_Up = false;
+            Ship_Skin = GetComponent<SpriteRenderer>();
+            Ship_Skin.color = Color.white;
+            Default_Form = true;
+        }
+    }
+
+    private void Update_Faster_Firing()
+    {
+        bool Is_Firing = Input.GetButton("Fire1");
+        Faster_Fire_Timer = Faster_Fire_Timer - Time.deltaTime;
+        if (Is_Firing == true && Faster_Fire_Timer <= 0)
+        {
+            Fire_Fast_Bullet();
+            Faster_Fire_Timer = Faster_Firing_Rate;
+        }
+        
+        if (Fire_Fast_Power_Up == 0)
+        {
+            Fast_Power_Up = false;
+            Ship_Skin = GetComponent<SpriteRenderer>();
+            Ship_Skin.color = Color.white;
+            Default_Form = true;
         }
     }
 
@@ -227,15 +296,15 @@ public class ShipScript : MonoBehaviour
     public int GetELScore()
     {
         return ELScore;
-    // if EL_score is greager than 1000 then add +1 to Extra Life 
+        // if EL_score is greager than 1000 then add +1 to Extra Life 
     }
 
-    public  void IncreaseScore(int addScore)
+    public void IncreaseScore(int addScore)
     {
         Score = Score + addScore;
         ELScore = ELScore + addScore;
 
-        if(ELScore >= SCORE_FOR_LIFE)
+        if (ELScore >= SCORE_FOR_LIFE)
         {
             ELScore = 0;
             Extra_Life = Extra_Life + 1;
@@ -246,4 +315,44 @@ public class ShipScript : MonoBehaviour
     {
         return Score;
     }
-}    
+
+    public void OnCollisionEnter2D(Collision2D Collision)
+    {
+        if (Collision.gameObject.CompareTag("Big_Power_Up"))
+        {
+            Big_Power_Up = true;
+            Default_Form = false;
+            Destroy(Collision.gameObject);
+        }
+        
+        if (Collision.gameObject.CompareTag("Fast_Power_Up"))
+        {
+            Fast_Power_Up = true;
+            Default_Form = false;
+            Destroy(Collision.gameObject);
+        }
+    }
+
+
+    //Setup stuff
+    //remove ireelevant variables EG: timer stuff, bool, etc.
+
+
+    //Logic - on collision
+    //when you pick up a power up - check its tag
+    //if its the tag you want, increase the number of bullets (EG: by 10)
+    //turn on the slider
+
+    //Logic - shooting
+    //When shooting, check if you have more than 0 'Shots', if so, do a big bullet
+    //everytime you shoot a big bullet, remove 1 from the 'NumberOfShots'.
+    //when its at 0, simply turn off the slider
+
+    //Reference the slider
+    //for the UI, you need to reference the 'Slider'
+        //public Slider bigBulletSlider;
+    //Reference - changing the value
+        //bigBulletSlider.Value = NumberOfBullets;
+
+}
+
