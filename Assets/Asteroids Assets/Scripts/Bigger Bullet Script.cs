@@ -41,6 +41,24 @@ public class BiggerBulletScript : MonoBehaviour
             Meteor.Take_Damage(Collition_Damage);
             Take_Damage(Meteor.Collision_Damage);
         }
+        // When Bullet Touches OMeteor find OMeteor
+        ObsidianMeteorScript OMeteor = trigger.gameObject.GetComponent<ObsidianMeteorScript>();
+
+        // If Meteor is found call (Take_Damage or Explode)
+        if (OMeteor != null)
+        {
+            OMeteor.Take_Damage(Collition_Damage);
+            Explode();
+        }
+        // When Bullet Touches AlienTurret find AlienTurret
+        AlienTurretScript AlienTurret = trigger.gameObject.GetComponent<AlienTurretScript>();
+
+        // If Meteor is found call (Take_Damage or Explode)
+        if (AlienTurret != null)
+        {
+            AlienTurret.Take_Damage(Collition_Damage);
+            Explode();
+        }
     }
 
     

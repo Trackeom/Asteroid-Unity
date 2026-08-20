@@ -19,13 +19,14 @@ public class ManagerScript : MonoBehaviour
     public int Spawn_Turret_Threshold = 15;
 
     private float Check_Timer = 0;
+
     IEnumerator MeteorIncreaser()
     {
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(60);
         Spawn_Meteor_Threshold = Spawn_Meteor_Threshold * 2;
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(60);
         Spawn_OMeteors = true;
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(60);
         Spawn_Turret = true;
     }
 

@@ -19,7 +19,7 @@ public class BiggerBulletBarScript : MonoBehaviour
     {
         if (Ship != null)
         {
-            BB_Slider.value = 1 - Ship.Big_Count_Down / Ship.Bigger_Firing_Rate;
+            BB_Slider.value = Ship.Big_Count_Down / Ship.Bigger_Firing_Rate;
         }
     }
 }

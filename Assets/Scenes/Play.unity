@@ -2681,11 +2681,11 @@ MonoBehaviour:
   Ship_Turn: {fileID: 1062337272}
   Ship_Thrust: {fileID: 513461079}
   Firing_Rate: 0.33
-  Bigger_Firing_Rate: 1
-  Faster_Firing_Rate: 1
+  Bigger_Firing_Rate: 0.66
+  Faster_Firing_Rate: 0.1675
   Engine_Power: 20
   Turn_Power: -0.5
-  Max_HP: 3
+  Max_HP: 999
   Current_HP: 0
   Bullet_Ref: {fileID: 5078401063653218294, guid: e72b52b2d638edc4d9fbf2620891293a, type: 3}
   Bullet_Speed: 150
@@ -2699,6 +2699,8 @@ MonoBehaviour:
   Extra_Life: 0
   Bigger_Fire_Timer: 0
   Faster_Fire_Timer: 0
+  Fast_Count_Down: 0
+  Big_Count_Down: 0
   Fast_Power_Up: 0
   Big_Power_Up: 0
   Default_Form: 1

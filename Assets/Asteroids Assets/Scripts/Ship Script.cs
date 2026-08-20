@@ -1,3 +1,4 @@
+using JetBrains.Annotations;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
@@ -27,30 +28,31 @@ public class ShipScript : MonoBehaviour
     public int Extra_Life = 0;
     public float Bigger_Fire_Timer = 0f;
     public float Faster_Fire_Timer = 0f;
-    public float Fast_Count_Down = 0;
-    public float Big_Count_Down = 0;
+    public float Fast_Count_Down = 0f;
+    public float Big_Count_Down = 0f;
     public bool Fast_Power_Up = false;
     public bool Big_Power_Up = false;
     public bool Default_Form = true;
-//  
     public int Life_Time_Seconds = 0;
     public int Life_Time_Minutes = 0;
     public int Life_Time_Hours = 0;
     public int Life_Time_Days = 0;
+
     private Rigidbody2D rb2D;
     private SpriteRenderer Ship_Skin;
     private float Fire_Timer = 0f;
     private int Score = 0;
     private int ELScore = 0;
 
+
     const int SCORE_FOR_LIFE = 1000;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        Bigger_Fire_Timer =+ Time.deltaTime;
-        Faster_Fire_Timer =+ Time.deltaTime;
         StartCoroutine(SimpleTime());
+        Fast_Count_Down = Fast_Count_Down + Time.deltaTime;
+        Big_Count_Down = Big_Count_Down + Time.deltaTime;
         Current_HP = Max_HP;
         rb2D = GetComponent<Rigidbody2D>();
         Retro_Funk.Play();
@@ -77,9 +79,9 @@ public class ShipScript : MonoBehaviour
                         Life_Time_Hours = 0;
                         Life_Time_Days += 1;
 
-//                      ( - DECORATION USE ONLY - )
+                        //                      ( - DECORATION USE ONLY - )
 
-//                      DO NOT STAY UP FOR DAYS I BEG YOU
+                        //                      DO NOT STAY UP FOR DAYS I BEG YOU
 
                     }
                 }
@@ -96,7 +98,7 @@ public class ShipScript : MonoBehaviour
             Ship_Skin = GetComponent<SpriteRenderer>();
             Ship_Skin.color = Color.white;
         }
-        
+
         if (Big_Power_Up == true)
         {
             Update_Bigger_Firing();
@@ -111,10 +113,22 @@ public class ShipScript : MonoBehaviour
             Ship_Skin.color = Color.lightBlue;
         }
 
+        if (Big_Power_Up == false)
+        {
+            Big_Count_Down = 2001;
+        }
+
+        if (Fast_Power_Up == false)
+        {
+            Fast_Count_Down = 2001;
+        }
         float H = Input.GetAxis("Horizontal");
         float V = Input.GetAxis("Vertical");
         Apply_Thrust(V);
         Apply_Torque(H);
+
+        Big_Count_Down -= 1;
+        Fast_Count_Down -= 1;
     }
 
     private void Apply_Thrust(float amount)
@@ -186,6 +200,7 @@ public class ShipScript : MonoBehaviour
         Retro_Funk.Stop();
         Game_Over();
         Destroy(gameObject);
+        Reset_Progress();
     }
 
     public void Fire_Bullet()
@@ -233,12 +248,14 @@ public class ShipScript : MonoBehaviour
             Bigger_Fire_Timer = Bigger_Firing_Rate;
         }
 
-        if (Bigger_Fire_Timer == 0)
+        if (Big_Count_Down <= 0)
         {
             Big_Power_Up = false;
             Ship_Skin = GetComponent<SpriteRenderer>();
             Ship_Skin.color = Color.white;
             Default_Form = true;
+            Debug.Log("Out of time");
+            Big_Count_Down = 2000;
         }
     }
 
@@ -251,13 +268,14 @@ public class ShipScript : MonoBehaviour
             Fire_Fast_Bullet();
             Faster_Fire_Timer = Faster_Firing_Rate;
         }
-        
-        if (Faster_Fire_Timer == 0)
+
+        if (Fast_Count_Down <= 0)
         {
             Fast_Power_Up = false;
             Ship_Skin = GetComponent<SpriteRenderer>();
             Ship_Skin.color = Color.white;
             Default_Form = true;
+            Debug.Log("Out of time");
         }
     }
 
@@ -319,18 +337,22 @@ public class ShipScript : MonoBehaviour
         {
             Big_Power_Up = true;
             Default_Form = false;
-            Big_Count_Down += 10;
             Destroy(Collision.gameObject);
         }
-        
+
         if (Collision.gameObject.CompareTag("Fast Power Up"))
         {
             Fast_Power_Up = true;
             Default_Form = false;
-            Fast_Count_Down += 10;
             Destroy(Collision.gameObject);
         }
     }
+
+    public void Reset_Progress()
+    {
+
+    }
+}
 
 
     //Setup stuff

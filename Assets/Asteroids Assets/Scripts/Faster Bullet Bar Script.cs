@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 public class FasterBulletBarScript : MonoBehaviour
 {
-    public Slider BB_Slider;
+    public Slider FB_Slider;
 
     private ShipScript Ship;
 
@@ -19,7 +19,7 @@ public class FasterBulletBarScript : MonoBehaviour
     {
         if (Ship != null)
         {
-            BB_Slider.value = 1 - Ship.Fast_Count_Down / Ship.Bigger_Firing_Rate;
+            FB_Slider.value = Ship.Fast_Count_Down / Ship.Bigger_Firing_Rate;
         }
     }
 }
