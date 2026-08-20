@@ -183,6 +183,7 @@ public class ShipScript : MonoBehaviour
                 Instantiate(Explosion_Ref, transform.position, transform.rotation);
                 Extra_Life = Extra_Life - 1;
                 Current_HP = Max_HP;
+                Reset_Progress();
             }
             else
             {
@@ -200,7 +201,6 @@ public class ShipScript : MonoBehaviour
         Retro_Funk.Stop();
         Game_Over();
         Destroy(gameObject);
-        Reset_Progress();
     }
 
     public void Fire_Bullet()
@@ -350,6 +350,8 @@ public class ShipScript : MonoBehaviour
 
     public void Reset_Progress()
     {
+        ManagerScript Manager = GetComponent<ManagerScript>();
+        Update.Check_Timer = 0;
 
     }
 }
