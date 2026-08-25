@@ -1,10 +1,12 @@
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.UIElements;
 
-public class FasterBulletBarScript : MonoBehaviour
+public class LevelBoxScript : MonoBehaviour
 {
-    public Slider FB_Slider;
+    public TMP_Text Level_Text_Box;
+    public GameObject Level_Panel;
 
     private ShipScript Ship;
 
@@ -19,7 +21,7 @@ public class FasterBulletBarScript : MonoBehaviour
     {
         if (Ship != null)
         {
-            FB_Slider.value = Ship.Fast_Count_Down / Ship.Faster_Firing_Rate;
+            Level_Text_Box.text = "Lv " + Ship.Current_Level.ToString();
         }
     }
 }

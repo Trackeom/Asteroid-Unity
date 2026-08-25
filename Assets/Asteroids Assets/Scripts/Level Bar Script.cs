@@ -2,9 +2,9 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class FasterBulletBarScript : MonoBehaviour
+public class LevelBarScript : MonoBehaviour
 {
-    public Slider FB_Slider;
+    public Slider Level_Slider;
 
     private ShipScript Ship;
 
@@ -19,7 +19,8 @@ public class FasterBulletBarScript : MonoBehaviour
     {
         if (Ship != null)
         {
-            FB_Slider.value = Ship.Fast_Count_Down / Ship.Faster_Firing_Rate;
+            Level_Slider.value = Ship.Start_Level;
+            Level_Slider.maxValue = Ship.Max_Level;
         }
     }
 }

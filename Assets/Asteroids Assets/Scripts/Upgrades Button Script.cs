@@ -4,6 +4,7 @@ using UnityEngine.UI;
 public class UpgradeButtonScript : MonoBehaviour
 {
     SerializeField Button;
+    private Image Upgrade_Board;
     private ShipScript Ship;
     public void Click_Movement()
     {
@@ -12,7 +13,7 @@ public class UpgradeButtonScript : MonoBehaviour
         {
             Ship.Fuel = Ship.Fuel + 75000;
             Ship.Pay = Ship.Pay - 250;
-            Debug.Log("Working");
+            Close_Board();
         }
     }
 
@@ -23,7 +24,7 @@ public class UpgradeButtonScript : MonoBehaviour
         {
             Ship.Bullet_Speed = Ship.Bullet_Speed + 10;
             Ship.Pay = Ship.Pay - 250;
-            Debug.Log("Working");
+            Close_Board();
         }
     }
 
@@ -35,7 +36,12 @@ public class UpgradeButtonScript : MonoBehaviour
             Ship.Max_HP = Ship.Max_HP + 1;
             Ship.Current_HP = Ship.Current_HP + 1;
             Ship.Pay = Ship.Pay - 500;
-            Debug.Log("Working");
+            Close_Board();
         }
+    }
+
+    public void Close_Board()
+    {
+
     }
 }

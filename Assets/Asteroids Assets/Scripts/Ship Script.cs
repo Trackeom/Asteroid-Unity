@@ -44,6 +44,9 @@ public class ShipScript : MonoBehaviour
     public bool OMeteor = false;
     public bool Alien_Ship = false;
     public int Pay = 0;
+    public int Current_Level = 0;
+    public int Start_Level = 0;
+    public int Max_Level = 500;
 
     private bool No_Enemies = false;
     private Rigidbody2D rb2D;
@@ -364,6 +367,7 @@ public class ShipScript : MonoBehaviour
         Score = Score + addScore;
         ELScore = ELScore + addScore;
         Pay = Pay + addScore;
+        Start_Level = Start_Level + addScore;
 
         if (ELScore >= SCORE_FOR_LIFE)
         {
@@ -456,7 +460,18 @@ public class ShipScript : MonoBehaviour
 
     public void Track_LU()
     {
-
+        if (Start_Level > Max_Level)
+        {
+            Start_Level = 0;
+            Max_Level += 100;
+            Current_Level += 1;
+        }
     }
+
+    public int GetLevel()
+    {
+        return Current_Level;
+    }
+
 }
 
