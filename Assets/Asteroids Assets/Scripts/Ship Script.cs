@@ -23,7 +23,7 @@ public class ShipScript : MonoBehaviour
     public float Bigger_Bullet_Speed = 150f;
     public float Faster_Bullet_Speed = 200;
     public GameObject Explosion_Ref;
-    public ScreenFlash Flash;
+    public ScreenFlashScript Flash;
     public float Teleport = 0;
     public int Extra_Life = 0;
     public float Bigger_Fire_Timer = 0f;
@@ -37,12 +37,22 @@ public class ShipScript : MonoBehaviour
     public int Life_Time_Minutes = 0;
     public int Life_Time_Hours = 0;
     public int Life_Time_Days = 0;
+    public int Fuel = 75000;
+    public bool Engine_Thrust = false;
+    public bool Engine_Turn = false;
+    public bool Level_Up = false;
+    public bool Meteor = false;
+    public bool OMeteor = false;
+    public bool Alien_Ship = false;
+    public int Pay = 0;
 
+    private bool No_Enemies = false;
     private Rigidbody2D rb2D;
     private SpriteRenderer Ship_Skin;
     private float Fire_Timer = 0f;
     private int Score = 0;
-    private int ELScore = 0;
+    private float ELScore = 0;
+
 
 
     const int SCORE_FOR_LIFE = 1000;
@@ -103,7 +113,7 @@ public class ShipScript : MonoBehaviour
         {
             Update_Bigger_Firing();
             Ship_Skin = GetComponent<SpriteRenderer>();
-            Ship_Skin.color = Color.yellow;
+            Ship_Skin.color = Color.orange;
         }
 
         if (Fast_Power_Up == true)
@@ -122,6 +132,7 @@ public class ShipScript : MonoBehaviour
         {
             Fast_Count_Down = 2001;
         }
+        
         float H = Input.GetAxis("Horizontal");
         float V = Input.GetAxis("Vertical");
         Apply_Thrust(V);
@@ -129,25 +140,55 @@ public class ShipScript : MonoBehaviour
 
         Big_Count_Down -= 1;
         Fast_Count_Down -= 1;
+
+        if (Engine_Thrust == true)
+        {
+            Fuel -= 1;
+            fuel_Check();
+        }
+
+        if (Engine_Turn == true)
+        {
+            Fuel -= 1;
+            fuel_Check();
+        }
+
+        if (Fuel > 75000)
+        {
+            Fuel = 75000;
+        }
+
+        if (Level_Up && No_Enemies == true)
+        {
+            //Upgrade_panal
+        }
+
+        Track_Enemies();
+        Track_LU();
     }
 
     private void Apply_Thrust(float amount)
     {
-        if (amount > 0f)
+        if (Fuel > 0f)
         {
-            Vector2 Thrust = transform.up * Engine_Power * Time.deltaTime * amount;
-            rb2D.AddForce(Thrust);
+            if (amount > 0f)
+            {
+                Vector2 Thrust = transform.up * Engine_Power * Time.deltaTime * amount;
+                rb2D.AddForce(Thrust);
 
-            if (Ship_Thrust.isPlaying == false)
-            {
-                Ship_Thrust.Play();
+                if (Ship_Thrust.isPlaying == false)
+                {
+                    Ship_Thrust.Play();
+                    Engine_Thrust = true;
+                }
             }
-        }
-        else
-        {
-            if (Ship_Thrust.isPlaying == true)
+            else
             {
-                Ship_Thrust.Stop();
+                if (Ship_Thrust.isPlaying == true)
+                {
+                    Ship_Thrust.Stop();
+                    Engine_Thrust = false;
+                }
             }
         }
     }
@@ -155,20 +196,25 @@ public class ShipScript : MonoBehaviour
 
     private void Apply_Torque(float amount)
     {
-        float Torque = amount * Turn_Power * Time.deltaTime;
-        rb2D.AddTorque(Torque);
-        if (Ship_Turn.isPlaying == true)
+        if (Fuel > 0f)
         {
-            if (amount == 0)
+            float Torque = amount * Turn_Power * Time.deltaTime;
+            rb2D.AddTorque(Torque);
+            if (Ship_Turn.isPlaying == true)
             {
-                Ship_Turn.Stop();
+                if (amount == 0)
+                {
+                    Ship_Turn.Stop();
+                    Engine_Turn = false;
+                }
             }
-        }
-        if (Ship_Turn.isPlaying == false)
-        {
-            if (amount != 0)
+            if (Ship_Turn.isPlaying == false)
             {
-                Ship_Turn.Play();
+                if (amount != 0)
+                {
+                    Ship_Turn.Play();
+                    Engine_Turn = true;
+                }
             }
         }
     }
@@ -308,16 +354,17 @@ public class ShipScript : MonoBehaviour
 
     }
 
-    public int GetELScore()
+    public float GetELScore()
     {
         return ELScore;
-        // if EL_score is greager than 1000 then add +1 to Extra Life 
+        //if EL_score is greager than 1000 then add +1 to Extra Life 
     }
 
     public void IncreaseScore(int addScore)
     {
         Score = Score + addScore;
         ELScore = ELScore + addScore;
+        Pay = Pay + addScore;
 
         if (ELScore >= SCORE_FOR_LIFE)
         {
@@ -329,6 +376,11 @@ public class ShipScript : MonoBehaviour
     public int GetScore()
     {
         return Score;
+    }
+
+    public int GetPay()
+    {
+        return Pay;
     }
 
     public void OnCollisionEnter2D(Collision2D Collision)
@@ -350,32 +402,62 @@ public class ShipScript : MonoBehaviour
 
     public void Reset_Progress()
     {
-        ManagerScript Manager = GetComponent<ManagerScript>();
-        Update.Check_Timer = 0;
+        //ManagerScript Manager = GetComponent<ManagerScript>();
+        //Update.Check_Timer = 0;
 
     }
-}
+
+    public void fuel_Check()
+    {
+        if (Fuel < 0)
+        {
+            Explode();
+        }
+    }
+
+    public void Track_Enemies()
+    {
+        MeteorScript Enemy_1 = FindObjectOfType<MeteorScript>();
+        if (Enemy_1 != null)
+        {
+            Meteor = true;
+        }
+        else
+        {
+            Meteor = false;
+        }
 
 
-    //Setup stuff
-    //remove ireelevant variables EG: timer stuff, bool, etc.
+        ObsidianMeteorScript Enemy_2 = FindObjectOfType<ObsidianMeteorScript>();
+        if (Enemy_2 != null)
+        {
+            OMeteor = true;
+        }
+        else
+        {
+            OMeteor = false;
+        }
 
 
-    //Logic - on collision
-    //when you pick up a power up - check its tag
-    //if its the tag you want, increase the number of bullets (EG: by 10)
-    //turn on the slider
+        AlienTurretScript Enemy_3 = FindObjectOfType<AlienTurretScript>();
+        if (Enemy_3 != null)
+        {
+            Alien_Ship = true;
+        }
+        else
+        {
+            Alien_Ship = false;
+        }
 
-    //Logic - shooting
-    //When shooting, check if you have more than 0 'Shots', if so, do a big bullet
-    //everytime you shoot a big bullet, remove 1 from the 'NumberOfShots'.
-    //when its at 0, simply turn off the slider
+        if (Meteor || OMeteor || Alien_Ship == true)
+        {
+            No_Enemies = false;
+        }
+    }
 
-    //Reference the slider
-    //for the UI, you need to reference the 'Slider'
-        //public Slider bigBulletSlider;
-    //Reference - changing the value
-        //bigBulletSlider.Value = NumberOfBullets;
+    public void Track_LU()
+    {
 
+    }
 }
 

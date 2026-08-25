@@ -2,7 +2,7 @@ using UnityEngine.UI;
 using System.Collections;
 using UnityEngine;
 
-public class ScreenFlash : MonoBehaviour
+public class ScreenFlashScript : MonoBehaviour
 {
     public float Flash_Duration = 0.33f;
 

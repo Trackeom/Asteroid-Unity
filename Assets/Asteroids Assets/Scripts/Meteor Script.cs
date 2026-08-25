@@ -36,7 +36,6 @@ public class MeteorScript : MonoBehaviour
         }
     }
 
-
     public void Take_Damage(float damage)
     {
         Current_HP = Current_HP - damage;
