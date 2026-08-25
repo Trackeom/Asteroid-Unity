@@ -17,14 +17,13 @@ public class ShipScript : MonoBehaviour
     public float Max_HP = 3f;
     public float Current_HP;
     public GameObject Bullet_Ref;
-    public float Bullet_Speed = 150f;
+    public float Bullet_Speed = 100f;
     public GameObject Bigger_Bullet_Ref;
     public GameObject Faster_Bullet_Ref;
     public float Bigger_Bullet_Speed = 150f;
     public float Faster_Bullet_Speed = 200;
     public GameObject Explosion_Ref;
     public ScreenFlashScript Flash;
-    public float Teleport = 0;
     public int Extra_Life = 0;
     public float Bigger_Fire_Timer = 0f;
     public float Faster_Fire_Timer = 0f;

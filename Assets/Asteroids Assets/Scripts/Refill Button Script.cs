@@ -12,7 +12,6 @@ public class RefillButtonScript : MonoBehaviour
         {
             Ship.Fuel = Ship.Fuel + 75000;
             Ship.Pay = Ship.Pay - 100;
-            Debug.Log("Working");
         }
     }
 }
