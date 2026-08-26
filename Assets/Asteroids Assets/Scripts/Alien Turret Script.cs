@@ -24,6 +24,10 @@ public class AlienTurretScript : MonoBehaviour
         Timer = Time.deltaTime;
         Current_HP = Max_HP;
         Player = FindObjectOfType<ShipScript>();
+        if (Player != null)
+        {
+            Player.Enemy_Counter += 1;
+        }
 
         StartCoroutine (Move_To_Target());
     }
@@ -101,13 +105,13 @@ public class AlienTurretScript : MonoBehaviour
             Instantiate(Faster_Power_Up_Ref, transform.position, transform.rotation);
         }
 
-            ShipScript ship = FindObjectOfType<ShipScript>();
+            ShipScript Ship = FindObjectOfType<ShipScript>();
 
-        if (ship != null)
+        if (Ship != null)
         {
-            ship.IncreaseScore(Score_Value);
+            Ship.IncreaseScore(Score_Value);
+            Ship.Enemy_Counter -= 1;
         }
-
         Destroy(gameObject);
     }
 }

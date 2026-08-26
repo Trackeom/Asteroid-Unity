@@ -11,23 +11,31 @@ public class ManagerScript : MonoBehaviour
     public GameObject[] Turret_Refs;
     public bool Spawn_OMeteors = false;
     public bool Spawn_Turret = false;
-
     public float Check_Interval = 3f;
     public float Push_Force = 100f;
     public int Spawn_Meteor_Threshold = 5; //how many metoers on the screen (based on MetorScript.SpawnValue
     public int Spawn_OMeteor_Threshold = 10; //how many Ometoers on the screen (based on ObsidianMetorScript.SpawnValue
     public int Spawn_Turret_Threshold = 15;
+    public ShipScript Ship;
 
     private float Check_Timer = 0;
 
-    IEnumerator MeteorIncreaser()
+    public void Enemy_Increaser()
     {
-        yield return new WaitForSeconds(60);
-        Spawn_Meteor_Threshold = Spawn_Meteor_Threshold * 2;
-        yield return new WaitForSeconds(60);
-        Spawn_OMeteors = true;
-        yield return new WaitForSeconds(60);
-        Spawn_Turret = true;
+        if (Ship.Current_Level == 1)
+        {
+            Spawn_Meteor_Threshold = Spawn_Meteor_Threshold * 2;
+        }
+        
+        if (Ship.Current_Level == 2)
+        {
+            Spawn_OMeteors = true;
+        }
+
+        if (Ship.Current_Level == 3)
+        {
+            Spawn_Turret = true;
+        }
     }
 
 
@@ -42,12 +50,6 @@ public class ManagerScript : MonoBehaviour
         }
     }
 
-
-    private void Start()
-    {
-        StartCoroutine(MeteorIncreaser());
-
-    }
     // Update is called once per frame
     void Update()
     {
@@ -56,23 +58,37 @@ public class ManagerScript : MonoBehaviour
         if (Check_Timer > Check_Interval)
         {
             Check_Timer = 0f;
+            Enemy_Increaser();
             {
                 if (Total_Meteor_Value() < Spawn_Meteor_Threshold)
                 {
-                    Spawn_New_Meteor();
+                    if (Ship.Leveling_Up == false)
+                    {
+                        Spawn_New_Meteor();
+                    }
                 }
+
                 if (Spawn_OMeteors == true)
                 {
                     if (Total_OMeteor_Value() < Spawn_OMeteor_Threshold)
                     {
-                        Spawn_New_OMeteor();
+                        if (Ship.Leveling_Up == false)
+                        {
+                            Spawn_New_OMeteor();
+                        }
+
                     }
                 }
+
                 if (Spawn_Turret == true)
                 {
                     if (Total_Turret_Value() < Spawn_Turret_Threshold)
                     {
-                        Spawn_New_Turret();
+                        if (Ship.Leveling_Up == false)
+                        {
+                            Spawn_New_Turret();
+                        }
+
                     }
                 }
                 

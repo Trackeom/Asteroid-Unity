@@ -18,6 +18,12 @@ public class ObsidianMeteorScript : MonoBehaviour
     void Start()
     {
         Current_HP += Max_HP;
+
+        ShipScript Ship = FindObjectOfType<ShipScript>();
+        if (Ship != null)
+        {
+            Ship.Enemy_Counter += 1;
+        }
     }
 
     // Update is called once per frame
@@ -49,10 +55,11 @@ public class ObsidianMeteorScript : MonoBehaviour
 
     public void Explode()
     {
-        ShipScript ship = FindObjectOfType<ShipScript>();
-        if (ship != null)
+        ShipScript Ship = FindObjectOfType<ShipScript>();
+        if (Ship != null)
         {
-            ship.IncreaseScore(Score_Value);
+            Ship.IncreaseScore(Score_Value);
+            Ship.Enemy_Counter -= 1;
         }
 
         Spawn_Meteor_Origonal();

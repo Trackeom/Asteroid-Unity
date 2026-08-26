@@ -17,7 +17,11 @@ public class MeteorScript : MonoBehaviour
 
     void Start()
     {
-
+        ShipScript Ship = FindObjectOfType<ShipScript>();
+        if (Ship != null)
+        {
+            Ship.Enemy_Counter += 1;
+        }
     }
 
     // Update is called once per frame
@@ -48,10 +52,11 @@ public class MeteorScript : MonoBehaviour
 
     public void Explode()
     {
-        ShipScript ship = FindObjectOfType<ShipScript>();
-        if (ship != null)
+        ShipScript Ship = FindObjectOfType<ShipScript>();
+        if (Ship != null)
         {
-            ship.IncreaseScore(Score_Value);
+            Ship.IncreaseScore(Score_Value);
+            Ship.Enemy_Counter -= 1;
         }
         if (Meteor_Chunks.Length > 0)
         {

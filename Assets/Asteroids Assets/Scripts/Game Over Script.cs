@@ -17,13 +17,6 @@ public class GameOverScript : MonoBehaviour
         Hide();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-
     public void Show (bool Celebrate_High_Score)
     {
         Score_Text_Box.text = Ship.GetScore().ToString();

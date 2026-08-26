@@ -1,19 +1,37 @@
+using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class UpgradeButtonScript : MonoBehaviour
 {
     SerializeField Button;
-    private Image Upgrade_Board;
+    public VisableUpgradesScript Upgrade_Panal;
+    public bool Selected = false;
+
     private ShipScript Ship;
+
+    public void Update()
+    {
+        if (Selected == true)
+        {
+            Upgrade_Panal.Invisable();
+            Ship.Leveling_Up = false;
+            Selected = false;
+            Debug.Log("Turn Invis");
+        }
+    }
+
     public void Click_Movement()
     {
         Ship = FindObjectOfType<ShipScript>();
         if (Ship != null && Ship.Pay > 250)
         {
-            Ship.Fuel = Ship.Fuel + 75000;
-            Ship.Pay = Ship.Pay - 250;
-            Close_Board();
+            if (Ship.Leveling_Up = true)
+            {
+                Ship.Fuel = Ship.Fuel + 75000;
+                Ship.Pay = Ship.Pay - 250;
+                Selected = true;
+            }
         }
     }
 
@@ -22,9 +40,13 @@ public class UpgradeButtonScript : MonoBehaviour
         Ship = FindObjectOfType<ShipScript>();
         if (Ship != null && Ship.Pay > 250)
         {
-            Ship.Bullet_Speed = Ship.Bullet_Speed + 10;
-            Ship.Pay = Ship.Pay - 250;
-            Close_Board();
+            if (Ship.Leveling_Up = true)
+            {
+                Ship.Bullet_Speed = Ship.Bullet_Speed + 10;
+                Ship.Pay = Ship.Pay - 250;
+                Selected = true;
+            }
+
         }
     }
 
@@ -33,15 +55,13 @@ public class UpgradeButtonScript : MonoBehaviour
         Ship = FindObjectOfType<ShipScript>();
         if (Ship != null && Ship.Pay > 500)
         {
-            Ship.Max_HP = Ship.Max_HP + 1;
-            Ship.Current_HP = Ship.Current_HP + 1;
-            Ship.Pay = Ship.Pay - 500;
-            Close_Board();
+            if (Ship.Leveling_Up = true)
+            {
+                Ship.Max_HP = Ship.Max_HP + 1;
+                Ship.Current_HP = Ship.Current_HP + 1;
+                Ship.Pay = Ship.Pay - 500;
+                Selected = true;
+            }
         }
-    }
-
-    public void Close_Board()
-    {
-
     }
 }

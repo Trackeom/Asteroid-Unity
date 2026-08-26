@@ -39,16 +39,18 @@ public class ShipScript : MonoBehaviour
     public int Fuel = 75000;
     public bool Engine_Thrust = false;
     public bool Engine_Turn = false;
-    public bool Level_Up = false;
     public bool Meteor = false;
     public bool OMeteor = false;
     public bool Alien_Ship = false;
     public int Pay = 0;
     public int Current_Level = 0;
     public int Start_Level = 0;
-    public int Max_Level = 500;
+    public int Max_Level = 50;
+    public int Enemy_Counter = 0;
+    public VisableUpgradesScript Upgrade_Panal;
+    public bool Leveling_Up = false;
+    public bool No_Enemies = false;
 
-    private bool No_Enemies = false;
     private Rigidbody2D rb2D;
     private SpriteRenderer Ship_Skin;
     private float Fire_Timer = 0f;
@@ -62,7 +64,6 @@ public class ShipScript : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        StartCoroutine(SimpleTime());
         Fast_Count_Down = Fast_Count_Down + Time.deltaTime;
         Big_Count_Down = Big_Count_Down + Time.deltaTime;
         Current_HP = Max_HP;
@@ -160,9 +161,9 @@ public class ShipScript : MonoBehaviour
             Fuel = 75000;
         }
 
-        if (Level_Up && No_Enemies == true)
+        if (Leveling_Up && No_Enemies == true)
         {
-            //Upgrade_panal
+            Upgrade_Panal.Visable();
         }
 
         Track_Enemies();
@@ -245,7 +246,6 @@ public class ShipScript : MonoBehaviour
     public void Explode()
     {
         Instantiate(Explosion_Ref, transform.position, transform.rotation);
-        Debug.Log("Game Over");
         Retro_Funk.Stop();
         Game_Over();
         Destroy(gameObject);
@@ -302,7 +302,6 @@ public class ShipScript : MonoBehaviour
             Ship_Skin = GetComponent<SpriteRenderer>();
             Ship_Skin.color = Color.white;
             Default_Form = true;
-            Debug.Log("Out of time");
             Big_Count_Down = 2000;
         }
     }
@@ -323,7 +322,6 @@ public class ShipScript : MonoBehaviour
             Ship_Skin = GetComponent<SpriteRenderer>();
             Ship_Skin.color = Color.white;
             Default_Form = true;
-            Debug.Log("Out of time");
         }
     }
 
@@ -420,39 +418,12 @@ public class ShipScript : MonoBehaviour
 
     public void Track_Enemies()
     {
-        MeteorScript Enemy_1 = FindObjectOfType<MeteorScript>();
-        if (Enemy_1 != null)
+        if (Enemy_Counter == 0)
         {
-            Meteor = true;
-        }
-        else
-        {
-            Meteor = false;
+            No_Enemies = true;
         }
 
-
-        ObsidianMeteorScript Enemy_2 = FindObjectOfType<ObsidianMeteorScript>();
-        if (Enemy_2 != null)
-        {
-            OMeteor = true;
-        }
-        else
-        {
-            OMeteor = false;
-        }
-
-
-        AlienTurretScript Enemy_3 = FindObjectOfType<AlienTurretScript>();
-        if (Enemy_3 != null)
-        {
-            Alien_Ship = true;
-        }
-        else
-        {
-            Alien_Ship = false;
-        }
-
-        if (Meteor || OMeteor || Alien_Ship == true)
+        if (Enemy_Counter > 0)
         {
             No_Enemies = false;
         }
@@ -464,7 +435,7 @@ public class ShipScript : MonoBehaviour
         {
             Start_Level = 0;
             Max_Level += 100;
-            Current_Level += 1;
+            Leveling_Up = true;
         }
     }
 
@@ -473,5 +444,9 @@ public class ShipScript : MonoBehaviour
         return Current_Level;
     }
 
+    public void Now_Level_Up()
+    {
+        Current_Level += 1;
+    }
 }
 
