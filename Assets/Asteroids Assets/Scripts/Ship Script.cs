@@ -27,16 +27,17 @@ public class ShipScript : MonoBehaviour
     public int Extra_Life = 0;
     public float Bigger_Fire_Timer = 0f;
     public float Faster_Fire_Timer = 0f;
-    public float Fast_Count_Down = 0f;
-    public float Big_Count_Down = 0f;
+    public float Fast_Count_Down = 4000f;
+    public float Big_Count_Down = 4000f;
     public bool Fast_Power_Up = false;
     public bool Big_Power_Up = false;
     public bool Default_Form = true;
+    public float Life_Time_MS;
     public int Life_Time_Seconds = 0;
     public int Life_Time_Minutes = 0;
     public int Life_Time_Hours = 0;
     public int Life_Time_Days = 0;
-    public int Fuel = 75000;
+    public int Fuel = 50000;
     public bool Engine_Thrust = false;
     public bool Engine_Turn = false;
     public bool Meteor = false;
@@ -57,13 +58,12 @@ public class ShipScript : MonoBehaviour
     private int Score = 0;
     private float ELScore = 0;
 
-
-
     const int SCORE_FOR_LIFE = 1000;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        Life_Time_MS = Life_Time_MS + Time.deltaTime;
         Fast_Count_Down = Fast_Count_Down + Time.deltaTime;
         Big_Count_Down = Big_Count_Down + Time.deltaTime;
         Current_HP = Max_HP;
@@ -71,12 +71,14 @@ public class ShipScript : MonoBehaviour
         Retro_Funk.Play();
     }
 
-    IEnumerator SimpleTime()
+    public void Clock()
     {
-        while (true)
+        Life_Time_MS += 1;
+        if (Life_Time_MS > 1000)
         {
-            yield return new WaitForSeconds(1f);
-            Life_Time_Seconds = Life_Time_Seconds + 1;
+            Life_Time_MS = 0;
+            Life_Time_Seconds += 1;
+
             if (Life_Time_Seconds > 60)
             {
                 Life_Time_Seconds = 0;
@@ -92,19 +94,21 @@ public class ShipScript : MonoBehaviour
                         Life_Time_Hours = 0;
                         Life_Time_Days += 1;
 
-                        //                      ( - DECORATION USE ONLY - )
+                        //                  ( - DECORATION USE ONLY - )
 
-                        //                      DO NOT STAY UP FOR DAYS I BEG YOU
+                        //                  DO NOT STAY UP FOR DAYS I BEG YOU
 
                     }
                 }
             }
         }
-    }
+    }   
 
     // Update is called once per frame
     void Update()
     {
+        Clock();
+
         if (Default_Form == true)
         {
             Update_Firing();
@@ -128,12 +132,12 @@ public class ShipScript : MonoBehaviour
 
         if (Big_Power_Up == false)
         {
-            Big_Count_Down = 2001;
+            Big_Count_Down = 4001;
         }
 
         if (Fast_Power_Up == false)
         {
-            Fast_Count_Down = 2001;
+            Fast_Count_Down = 4001;
         }
         
         float H = Input.GetAxis("Horizontal");
@@ -156,9 +160,9 @@ public class ShipScript : MonoBehaviour
             fuel_Check();
         }
 
-        if (Fuel > 75000)
+        if (Fuel > 50000)
         {
-            Fuel = 75000;
+            Fuel = 50000;
         }
 
         if (Leveling_Up && No_Enemies == true)
@@ -302,7 +306,7 @@ public class ShipScript : MonoBehaviour
             Ship_Skin = GetComponent<SpriteRenderer>();
             Ship_Skin.color = Color.white;
             Default_Form = true;
-            Big_Count_Down = 2000;
+            Big_Count_Down = 4000;
         }
     }
 
@@ -322,6 +326,7 @@ public class ShipScript : MonoBehaviour
             Ship_Skin = GetComponent<SpriteRenderer>();
             Ship_Skin.color = Color.white;
             Default_Form = true;
+            Fast_Count_Down = 4000;
         }
     }
 

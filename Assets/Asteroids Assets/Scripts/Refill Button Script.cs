@@ -10,7 +10,7 @@ public class RefillButtonScript : MonoBehaviour
         Ship = FindObjectOfType<ShipScript>();
         if (Ship != null && Ship.Pay > 100)
         {
-            Ship.Fuel = Ship.Fuel + 75000;
+            Ship.Fuel = Ship.Fuel + 50000;
             Ship.Pay = Ship.Pay - 100;
         }
     }
