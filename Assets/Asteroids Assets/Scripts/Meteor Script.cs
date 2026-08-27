@@ -59,21 +59,18 @@ public class MeteorScript : MonoBehaviour
             Ship.IncreaseScore(Score_Value);
             Ship.Enemy_Counter -= 1;
         }
+        
         if (Meteor_Chunks.Length > 0)
-        {
+        {            
             int Meteor_Chunks = Random.Range(Min_Chunks, Max_Chunks);
 
             for (int i = 0; i < Meteor_Chunks; i++)
             {
                 Create_Meteor_Chunk();
             }
-            
-        }
-        if (Random.Range(0, 10) == 5)
-        {
-            Instantiate(Fuel_Drop_Ref, transform.position, transform.rotation);
-        }
         Instantiate(Explosion_Ref, transform.position, transform.rotation);
+        }
+
         Destroy(gameObject);
     }
 

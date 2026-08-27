@@ -248,6 +248,7 @@ MonoBehaviour:
   - {fileID: 4462251006782469672, guid: ad25cfc85965dc340a6794698caa1661, type: 3}
   - {fileID: 4462251006782469672, guid: 65c0577bd719132448c70fa79cde26ae, type: 3}
   - {fileID: 4462251006782469672, guid: edbae57a36410504a9229b639994030d, type: 3}
+  - {fileID: 4462251006782469672, guid: 970ec4db48f19024387c29b62c15a4e0, type: 3}
   Fuel_Drop_Ref: {fileID: 4462251006782469672, guid: 970ec4db48f19024387c29b62c15a4e0, type: 3}
   Min_Chunks: 2
   Max_Chunks: 3

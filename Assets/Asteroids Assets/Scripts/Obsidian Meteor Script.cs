@@ -76,11 +76,6 @@ public class ObsidianMeteorScript : MonoBehaviour
         if (Random.Range(0, 10) == 5)
         {
             Instantiate(Bigger_Power_Up_Ref, transform.position, transform.rotation);
-
-            if (Random.Range(0, 10) == 5)
-            {
-                Instantiate(Fuel_Drop_Ref, transform.position, transform.rotation);
-            }
         }
     }
 }

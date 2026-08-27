@@ -38,8 +38,8 @@ public class ShipScript : MonoBehaviour
     
     public ScreenFlashScript Flash;
     public VisableUpgradesScript Upgrade_Panal;
+    public Rigidbody2D rb2D_Ship;
 
-    private Rigidbody2D rb2D;
     private SpriteRenderer Ship_Skin;
 
     public int Extra_Life = 0;
@@ -47,7 +47,6 @@ public class ShipScript : MonoBehaviour
     public bool Fast_Power_Up = false;
     public bool Big_Power_Up = false;
     public bool Engine_Thrust = false;
-    public bool Engine_Turn = false;
     public bool Meteor = false;
     public bool OMeteor = false;
     public bool Alien_Ship = false;
@@ -65,8 +64,7 @@ public class ShipScript : MonoBehaviour
     public int Start_Level = 0;
     public int Max_Level = 50;
     public int Enemy_Counter = 0;
-
-    private int Score = 0;
+    public int Score = 0;
 
     const int SCORE_FOR_LIFE = 1000;
 
@@ -77,7 +75,7 @@ public class ShipScript : MonoBehaviour
         Fast_Count_Down = Fast_Count_Down + Time.deltaTime;
         Big_Count_Down = Big_Count_Down + Time.deltaTime;
         Current_HP = Max_HP;
-        rb2D = GetComponent<Rigidbody2D>();
+        rb2D_Ship = GetComponent<Rigidbody2D>();
         Retro_Funk.Play();
     }
 
@@ -164,12 +162,6 @@ public class ShipScript : MonoBehaviour
             fuel_Check();
         }
 
-        if (Engine_Turn == true)
-        {
-            Fuel -= 1;
-            fuel_Check();
-        }
-
         if (Fuel > 50000)
         {
             Fuel = 50000;
@@ -191,7 +183,7 @@ public class ShipScript : MonoBehaviour
             if (amount > 0f)
             {
                 Vector2 Thrust = transform.up * Engine_Power * Time.deltaTime * amount;
-                rb2D.AddForce(Thrust);
+                rb2D_Ship.AddForce(Thrust);
 
                 if (Ship_Thrust.isPlaying == false)
                 {
@@ -216,13 +208,12 @@ public class ShipScript : MonoBehaviour
         if (Fuel > 0f)
         {
             float Torque = amount * Turn_Power * Time.deltaTime;
-            rb2D.AddTorque(Torque);
+            rb2D_Ship.AddTorque(Torque);
             if (Ship_Turn.isPlaying == true)
             {
                 if (amount == 0)
                 {
                     Ship_Turn.Stop();
-                    Engine_Turn = false;
                 }
             }
             if (Ship_Turn.isPlaying == false)
@@ -230,7 +221,6 @@ public class ShipScript : MonoBehaviour
                 if (amount != 0)
                 {
                     Ship_Turn.Play();
-                    Engine_Turn = true;
                 }
             }
         }
@@ -379,7 +369,6 @@ public class ShipScript : MonoBehaviour
     {
         Score = Score + addScore;
         ELScore = ELScore + addScore;
-        Pay = Pay + addScore;
         Start_Level = Start_Level + addScore;
 
         if (ELScore >= SCORE_FOR_LIFE)
@@ -392,11 +381,6 @@ public class ShipScript : MonoBehaviour
     public int GetScore()
     {
         return Score;
-    }
-
-    public int GetPay()
-    {
-        return Pay;
     }
 
     public void OnCollisionEnter2D(Collision2D Collision)
