@@ -1665,7 +1665,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -868.0001, y: -524.80005}
+  m_AnchoredPosition: {x: -828.8, y: -495.1}
   m_SizeDelta: {x: 160, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &512470252
@@ -1713,7 +1713,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 0}
   m_Direction: 0
   m_MinValue: 0
-  m_MaxValue: 2000
+  m_MaxValue: 4000
   m_WholeNumbers: 1
   m_Value: 0
   m_OnValueChanged:
@@ -2591,6 +2591,7 @@ MonoBehaviour:
   Spawn_Meteor_Threshold: 10
   Spawn_OMeteor_Threshold: 10
   Spawn_Turret_Threshold: 10
+  Ship: {fileID: 1212724705}
 --- !u!4 &629927336
 Transform:
   m_ObjectHideFlags: 0
@@ -3523,6 +3524,7 @@ GameObject:
   m_Component:
   - component: {fileID: 956925052}
   - component: {fileID: 956925054}
+  - component: {fileID: 956925055}
   - component: {fileID: 956925053}
   m_Layer: 5
   m_Name: Upgrade Background
@@ -3550,7 +3552,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 39.895866, y: -239}
+  m_AnchoredPosition: {x: 17.4, y: -239}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &956925053
@@ -3588,6 +3590,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 956925051}
   m_CullTransparentMesh: 1
+--- !u!114 &956925055
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 956925051}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e37ada08c96efe041b797077d750674c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Upgrade_Panal_Ref: {fileID: 956925051}
+  Ship: {fileID: 1212724705}
 --- !u!1 &990417076
 GameObject:
   m_ObjectHideFlags: 0
@@ -3773,8 +3789,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 567.1, y: -476.7}
-  m_SizeDelta: {x: 200, y: 50}
+  m_AnchoredPosition: {x: 523.19995, y: -462.75}
+  m_SizeDelta: {x: 200, y: 22.1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1011184270
 MonoBehaviour:
@@ -3861,7 +3877,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 139.28886, w: 30.022196}
+  m_margin: {x: 0, y: 0, z: 139.28886, w: -0.013102051}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -3890,7 +3906,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1013791505
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4193,7 +4209,7 @@ GameObject:
   - component: {fileID: 1130516432}
   - component: {fileID: 1130516431}
   m_Layer: 5
-  m_Name: Life Amount
+  m_Name: HP
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4238,9 +4254,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Life
-
-    Amount'
+  m_text: HP
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -4597,7 +4611,7 @@ MonoBehaviour:
   Firing_Rate: 0.33
   Bigger_Firing_Rate: 0.66
   Faster_Firing_Rate: 0.1675
-  Engine_Power: 20
+  Engine_Power: 10
   Turn_Power: -0.5
   Max_HP: 3
   Current_HP: 0
@@ -4617,6 +4631,7 @@ MonoBehaviour:
   Fast_Power_Up: 0
   Big_Power_Up: 0
   Default_Form: 1
+  Life_Time_MS: 0
   Life_Time_Seconds: 0
   Life_Time_Minutes: 0
   Life_Time_Hours: 0
@@ -4624,7 +4639,6 @@ MonoBehaviour:
   Fuel: 75000
   Engine_Thrust: 0
   Engine_Turn: 0
-  Level_Up: 0
   Meteor: 0
   OMeteor: 0
   Alien_Ship: 0
@@ -4632,6 +4646,10 @@ MonoBehaviour:
   Current_Level: 0
   Start_Level: 0
   Max_Level: 500
+  Enemy_Counter: 0
+  Upgrade_Panal: {fileID: 1555481168}
+  Leveling_Up: 0
+  No_Enemies: 0
 --- !u!1 &1238666863
 GameObject:
   m_ObjectHideFlags: 0
@@ -4807,7 +4825,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 524, y: 499.5}
+  m_AnchoredPosition: {x: 480.09998, y: 499.5}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1269438781
@@ -5398,7 +5416,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 497.9, y: -488.8}
+  m_AnchoredPosition: {x: 454, y: -488.8}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1472977075
@@ -5570,6 +5588,52 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1491203517}
   m_CullTransparentMesh: 1
+--- !u!1 &1555481167
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1555481169}
+  - component: {fileID: 1555481168}
+  m_Layer: 0
+  m_Name: Upgrade Check
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1555481168
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1555481167}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e37ada08c96efe041b797077d750674c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Upgrade_Panal_Ref: {fileID: 956925051}
+  Ship: {fileID: 1212724705}
+--- !u!4 &1555481169
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1555481167}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 980.34644, y: 324.95813, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1610495460
 GameObject:
   m_ObjectHideFlags: 0
@@ -5607,7 +5671,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -868, y: -512.3}
+  m_AnchoredPosition: {x: -828.79987, y: -482.5999}
   m_SizeDelta: {x: 160, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1610495462
@@ -5655,7 +5719,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 0}
   m_Direction: 0
   m_MinValue: 0
-  m_MaxValue: 2000
+  m_MaxValue: 4000
   m_WholeNumbers: 1
   m_Value: 0
   m_OnValueChanged:
@@ -6452,6 +6516,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a960158dac4a31c449a4c0de7176b06c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Upgrade_Panal: {fileID: 956925055}
+  Selected: 0
 --- !u!1 &1894549040
 GameObject:
   m_ObjectHideFlags: 0
@@ -6660,7 +6726,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 39.9, y: 499.5}
+  m_AnchoredPosition: {x: -4.0000305, y: 499.5}
   m_SizeDelta: {x: 160, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1952992571
@@ -6800,7 +6866,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 39.9, y: -488.5}
+  m_AnchoredPosition: {x: -4.0000305, y: -488.5}
   m_SizeDelta: {x: 160, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1963098236
@@ -6848,9 +6914,9 @@ MonoBehaviour:
   m_HandleRect: {fileID: 0}
   m_Direction: 0
   m_MinValue: 0
-  m_MaxValue: 75000
+  m_MaxValue: 50000
   m_WholeNumbers: 1
-  m_Value: 75000
+  m_Value: 50000
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
@@ -7731,3 +7797,4 @@ SceneRoots:
   - {fileID: 440037382}
   - {fileID: 519057300}
   - {fileID: 1786042540}
+  - {fileID: 1555481169}
