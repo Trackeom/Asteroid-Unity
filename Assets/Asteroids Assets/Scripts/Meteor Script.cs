@@ -9,6 +9,7 @@ public class MeteorScript : MonoBehaviour
     public float Collision_Damage = 1f;
     public GameObject Explosion_Ref;
     public GameObject[] Meteor_Chunks;
+    public GameObject Fuel_Drop_Ref;
     public int Min_Chunks = 2;
     public int Max_Chunks = 3;
     public float Explosion_Dist = 0.5f;
@@ -67,6 +68,10 @@ public class MeteorScript : MonoBehaviour
                 Create_Meteor_Chunk();
             }
             
+        }
+        if (Random.Range(0, 10) == 5)
+        {
+            Instantiate(Fuel_Drop_Ref, transform.position, transform.rotation);
         }
         Instantiate(Explosion_Ref, transform.position, transform.rotation);
         Destroy(gameObject);

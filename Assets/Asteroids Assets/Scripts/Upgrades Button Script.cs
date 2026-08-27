@@ -70,16 +70,6 @@ public class UpgradeButtonScript : MonoBehaviour
         }
     }
 
-    public void Click_Refuel()
-    {
-        Ship = FindObjectOfType<ShipScript>();
-        if (Ship != null && Ship.Pay > 100)
-        {
-            Ship.Fuel = Ship.Fuel + 50000;
-            Ship.Pay = Ship.Pay - 100;
-        }
-    }
-
     public void Click_Finish()
     {
         {

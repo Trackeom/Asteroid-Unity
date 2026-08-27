@@ -5,10 +5,12 @@ using UnityEngine.UI;
 
 public class ShipScript : MonoBehaviour
 {
+
     public AudioSource Retro_Funk;
     public AudioSource Ship_Damage;
     public AudioSource Ship_Turn;
     public AudioSource Ship_Thrust;
+
     public float Firing_Rate = 0.33f;
     public float Bigger_Firing_Rate = 0.66f;
     public float Faster_Firing_Rate = 0.1675f;
@@ -16,47 +18,55 @@ public class ShipScript : MonoBehaviour
     public float Turn_Power = -10f;
     public float Max_HP = 3f;
     public float Current_HP;
-    public GameObject Bullet_Ref;
     public float Bullet_Speed = 100f;
-    public GameObject Bigger_Bullet_Ref;
-    public GameObject Faster_Bullet_Ref;
     public float Bigger_Bullet_Speed = 150f;
     public float Faster_Bullet_Speed = 200;
-    public GameObject Explosion_Ref;
-    public ScreenFlashScript Flash;
-    public int Extra_Life = 0;
     public float Bigger_Fire_Timer = 0f;
     public float Faster_Fire_Timer = 0f;
     public float Fast_Count_Down = 4000f;
     public float Big_Count_Down = 4000f;
+    public float Life_Time_MS = 0;
+    
+    private float Fire_Timer = 0f;
+    private float ELScore = 0;
+
+    public GameObject Bullet_Ref;
+    public GameObject Bigger_Bullet_Ref;
+    public GameObject Faster_Bullet_Ref;
+
+    public GameObject Explosion_Ref;
+    
+    public ScreenFlashScript Flash;
+    public VisableUpgradesScript Upgrade_Panal;
+
+    private Rigidbody2D rb2D;
+    private SpriteRenderer Ship_Skin;
+
+    public int Extra_Life = 0;
+
     public bool Fast_Power_Up = false;
     public bool Big_Power_Up = false;
-    public bool Default_Form = true;
-    public float Life_Time_MS;
-    public int Life_Time_Seconds = 0;
-    public int Life_Time_Minutes = 0;
-    public int Life_Time_Hours = 0;
-    public int Life_Time_Days = 0;
-    public int Fuel = 50000;
     public bool Engine_Thrust = false;
     public bool Engine_Turn = false;
     public bool Meteor = false;
     public bool OMeteor = false;
     public bool Alien_Ship = false;
+    public bool Leveling_Up = false;
+    public bool No_Enemies = false;
+    public bool Default_Form = true;
+
+    public int Life_Time_Seconds = 0;
+    public int Life_Time_Minutes = 0;
+    public int Life_Time_Hours = 0;
+    public int Life_Time_Days = 0;
+    public int Fuel = 50000;
     public int Pay = 0;
     public int Current_Level = 0;
     public int Start_Level = 0;
     public int Max_Level = 50;
     public int Enemy_Counter = 0;
-    public VisableUpgradesScript Upgrade_Panal;
-    public bool Leveling_Up = false;
-    public bool No_Enemies = false;
 
-    private Rigidbody2D rb2D;
-    private SpriteRenderer Ship_Skin;
-    private float Fire_Timer = 0f;
     private int Score = 0;
-    private float ELScore = 0;
 
     const int SCORE_FOR_LIFE = 1000;
 
@@ -403,6 +413,12 @@ public class ShipScript : MonoBehaviour
             Fast_Power_Up = true;
             Default_Form = false;
             Destroy(Collision.gameObject);
+
+            if (Collision.gameObject.CompareTag("Fuel Drop"))
+            {
+                Fuel += 10000;
+                Destroy(Collision.gameObject);
+            }
         }
     }
 

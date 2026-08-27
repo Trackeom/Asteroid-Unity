@@ -151,6 +151,7 @@ MonoBehaviour:
   Explosion_Ref2: {fileID: 3345248609389438901, guid: 7764f9be368d6e14fb4831a944ebec3c, type: 3}
   Meteor_Origonal_Ref: {fileID: 3722381582396213371, guid: 0a239d082dcb86f478392bdc841cebc1, type: 3}
   Bigger_Power_Up_Ref: {fileID: 6659421845409028692, guid: ffdb5e2230148b440ae2f748249fdf0f, type: 3}
+  Fuel_Drop_Ref: {fileID: 4462251006782469672, guid: 970ec4db48f19024387c29b62c15a4e0, type: 3}
   Explosion_Dist: 0.5
   Explosion_Force: 10
   Score_Value: 50

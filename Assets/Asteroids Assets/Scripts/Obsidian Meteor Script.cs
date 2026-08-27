@@ -11,6 +11,7 @@ public class ObsidianMeteorScript : MonoBehaviour
     public GameObject Explosion_Ref2;
     public GameObject Meteor_Origonal_Ref;
     public GameObject Bigger_Power_Up_Ref;
+    public GameObject Fuel_Drop_Ref;
     public float Explosion_Dist = 0.5f;
     public float Explosion_Force = 10f;
     public int Score_Value = 10;
@@ -74,9 +75,12 @@ public class ObsidianMeteorScript : MonoBehaviour
 
         if (Random.Range(0, 10) == 5)
         {
-        Instantiate(Bigger_Power_Up_Ref, transform.position, transform.rotation);
+            Instantiate(Bigger_Power_Up_Ref, transform.position, transform.rotation);
+
+            if (Random.Range(0, 10) == 5)
+            {
+                Instantiate(Fuel_Drop_Ref, transform.position, transform.rotation);
+            }
         }
     }
-
-
 }
