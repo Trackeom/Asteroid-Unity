@@ -58,7 +58,7 @@ public class ShipScript : MonoBehaviour
     public int Life_Time_Minutes = 0;
     public int Life_Time_Hours = 0;
     public int Life_Time_Days = 0;
-    public int Fuel = 50000;
+    public int Fuel = 25000;
     public int Pay = 0;
     public int Current_Level = 0;
     public int Start_Level = 0;
@@ -162,9 +162,9 @@ public class ShipScript : MonoBehaviour
             fuel_Check();
         }
 
-        if (Fuel > 50000)
+        if (Fuel > 25000)
         {
-            Fuel = 50000;
+            Fuel = 25000;
         }
 
         if (Leveling_Up && No_Enemies == true)
@@ -397,12 +397,12 @@ public class ShipScript : MonoBehaviour
             Fast_Power_Up = true;
             Default_Form = false;
             Destroy(Collision.gameObject);
+        }
 
-            if (Collision.gameObject.CompareTag("Fuel Drop"))
-            {
-                Fuel += 10000;
-                Destroy(Collision.gameObject);
-            }
+        if (Collision.gameObject.CompareTag("Fuel Drop"))
+        {
+            Fuel += 5000;
+            Destroy(Collision.gameObject);
         }
     }
 

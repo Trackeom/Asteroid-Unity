@@ -30,7 +30,10 @@ public class UpgradeButtonScript : MonoBehaviour
             {
                 if (Ship.No_Enemies = true)
                 {
-                    Ship.rb2D_Ship.mass = Ship.rb2D_Ship.mass + 1;
+                    Ship.Engine_Power += 8;
+                    Ship.Turn_Power += -0.5f;
+                    Ship.rb2D_Ship.linearDamping += 1;
+                    Ship.rb2D_Ship.angularDamping += 1;
                     Ship.Score = Ship.Score - 250;
                 }
             }
@@ -39,6 +42,7 @@ public class UpgradeButtonScript : MonoBehaviour
 
     public void Click_Bullet()
     {
+        Ship = FindObjectOfType<ShipScript>();
         if (Ship != null && Ship.Score > 500)
         {
             if (Ship.Leveling_Up = true)
