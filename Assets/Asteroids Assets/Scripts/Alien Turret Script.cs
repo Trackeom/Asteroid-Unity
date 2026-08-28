@@ -3,10 +3,10 @@ using UnityEngine;
 
 public class AlienTurretScript : MonoBehaviour
 {
-    public int Spawn_Value = 7;
-    public float Fire_Timer = 0f;
+    public int Spawn_Value = 10;
+    public float Fire_Timer = 1f;
     public GameObject Bullet_Ref;
-    public float Bullet_Speed;
+    public float Bullet_Speed = 100;
     public float Collision_Damage = 1f;
     public float Max_HP = 3f;
     public float Current_HP;
@@ -16,7 +16,7 @@ public class AlienTurretScript : MonoBehaviour
     public int Score_Value = 75;
     public float Timer = 0f;
     public bool Moving;
-    ShipScript Player;
+    ShipScript Ship;
     public SpriteRenderer mySpriteRenderer;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -24,10 +24,10 @@ public class AlienTurretScript : MonoBehaviour
     {
         Timer = Time.deltaTime;
         Current_HP = Max_HP;
-        Player = FindObjectOfType<ShipScript>();
-        if (Player != null)
+        Ship = FindObjectOfType<ShipScript>();
+        if (Ship != null)
         {
-            Player.Enemy_Counter += 1;
+            Ship.Enemy_Counter += 1;
         }
 
         StartCoroutine (Move_To_Target());
@@ -37,9 +37,9 @@ public class AlienTurretScript : MonoBehaviour
     {
         while (mySpriteRenderer.isVisible == false)
         {
-            if (Player != null)
+            if (Ship != null)
             {
-                transform.position = Vector3.Lerp(transform.position, Player.transform.position, Time.deltaTime);
+                transform.position = Vector3.Lerp(transform.position, Ship.transform.position, Time.deltaTime);
             }
             yield return new WaitForEndOfFrame();
         }
@@ -50,9 +50,9 @@ public class AlienTurretScript : MonoBehaviour
         while(deltaTime < 0.5) //how many seconds to move towards the player
         {
             deltaTime += Time.deltaTime;
-            if (Player != null)
+            if (Ship != null)
             {
-                transform.position = Vector3.Lerp(transform.position, Player.transform.position, Time.deltaTime);
+                transform.position = Vector3.Lerp(transform.position, Ship.transform.position, Time.deltaTime);
             }
             yield return new WaitForEndOfFrame();
         }
@@ -61,10 +61,10 @@ public class AlienTurretScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Player != null)
+        if (Ship != null)
         {
             Fire_Timer += Time.deltaTime;
-            Vector3 direction = Player.transform.position - transform.position;
+            Vector3 direction = Ship.transform.position - transform.position;
             transform.up = direction;
             
             if (Fire_Timer > 2)

@@ -3,8 +3,8 @@ using UnityEngine;
 
 public class ObsidianMeteorScript : MonoBehaviour
 {
-    public int Spawn_Value = 5;
-    public float Max_HP = 1f;
+    public int Spawn_Value = 6;
+    public float Max_HP = 3f;
     public float Current_HP;
     public float Collision_Damage = 1f;
     public GameObject Explosion_Ref1;
@@ -13,8 +13,8 @@ public class ObsidianMeteorScript : MonoBehaviour
     public GameObject Bigger_Power_Up_Ref;
     public GameObject Fuel_Drop_Ref;
     public float Explosion_Dist = 0.5f;
-    public float Explosion_Force = 10f;
-    public int Score_Value = 10;
+    public float Explosion_Force = 10;
+    public int Score_Value = 50;
 
     void Start()
     {

@@ -24,7 +24,7 @@ public class UpgradeButtonScript : MonoBehaviour
     public void Click_Movement()
     {
         Ship = FindObjectOfType<ShipScript>();
-        if (Ship != null && Ship.Score > 250)
+        if (Ship != null && Ship.Score >= 250)
         {
             if (Ship.Leveling_Up = true)
             {
@@ -43,7 +43,7 @@ public class UpgradeButtonScript : MonoBehaviour
     public void Click_Bullet()
     {
         Ship = FindObjectOfType<ShipScript>();
-        if (Ship != null && Ship.Score > 500)
+        if (Ship != null && Ship.Score >= 500)
         {
             if (Ship.Leveling_Up = true)
             {
@@ -59,7 +59,7 @@ public class UpgradeButtonScript : MonoBehaviour
     public void Click_Life()
     {
         Ship = FindObjectOfType<ShipScript>();
-        if (Ship != null && Ship.Score > 750)
+        if (Ship != null && Ship.Score >= 750)
         {
             if (Ship.Leveling_Up)
             {

@@ -13,8 +13,8 @@ public class MeteorScript : MonoBehaviour
     public int Min_Chunks = 2;
     public int Max_Chunks = 3;
     public float Explosion_Dist = 0.5f;
-    public float Explosion_Force = 10f;
-    public int Score_Value = 10;
+    public float Explosion_Force = 10;
+    public int Score_Value = 30;
 
     void Start()
     {

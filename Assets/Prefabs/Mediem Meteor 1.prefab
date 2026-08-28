@@ -204,7 +204,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dff735e99b1bef8418e4f92ad3e4d1e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Spawn_Value: 2
+  Spawn_Value: 3
   Max_HP: 3
   Current_HP: 0
   Collision_Damage: 1
@@ -213,6 +213,7 @@ MonoBehaviour:
   - {fileID: 4462251006782469672, guid: ad25cfc85965dc340a6794698caa1661, type: 3}
   - {fileID: 4462251006782469672, guid: 65c0577bd719132448c70fa79cde26ae, type: 3}
   - {fileID: 4462251006782469672, guid: edbae57a36410504a9229b639994030d, type: 3}
+  Fuel_Drop_Ref: {fileID: 0}
   Min_Chunks: 2
   Max_Chunks: 3
   Explosion_Dist: 0.5

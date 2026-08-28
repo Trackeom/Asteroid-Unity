@@ -15,16 +15,16 @@ public class ShipScript : MonoBehaviour
     public float Bigger_Firing_Rate = 0.66f;
     public float Faster_Firing_Rate = 0.1675f;
     public float Engine_Power = 10f;
-    public float Turn_Power = -10f;
+    public float Turn_Power = -0.25f;
     public float Max_HP = 3f;
     public float Current_HP;
     public float Bullet_Speed = 100f;
-    public float Bigger_Bullet_Speed = 150f;
+    public float Bigger_Bullet_Speed = 100f;
     public float Faster_Bullet_Speed = 200;
     public float Bigger_Fire_Timer = 0f;
     public float Faster_Fire_Timer = 0f;
-    public float Fast_Count_Down = 4000f;
-    public float Big_Count_Down = 4000f;
+    public float Fast_Count_Down = 3000f;
+    public float Big_Count_Down = 3000f;
     public float Life_Time_MS = 0;
     
     private float Fire_Timer = 0f;
@@ -140,12 +140,12 @@ public class ShipScript : MonoBehaviour
 
         if (Big_Power_Up == false)
         {
-            Big_Count_Down = 4001;
+            Big_Count_Down = 3001;
         }
 
         if (Fast_Power_Up == false)
         {
-            Fast_Count_Down = 4001;
+            Fast_Count_Down = 3001;
         }
         
         float H = Input.GetAxis("Horizontal");
@@ -306,7 +306,7 @@ public class ShipScript : MonoBehaviour
             Ship_Skin = GetComponent<SpriteRenderer>();
             Ship_Skin.color = Color.white;
             Default_Form = true;
-            Big_Count_Down = 4000;
+            Big_Count_Down = 3000;
         }
     }
 
@@ -326,7 +326,7 @@ public class ShipScript : MonoBehaviour
             Ship_Skin = GetComponent<SpriteRenderer>();
             Ship_Skin.color = Color.white;
             Default_Form = true;
-            Fast_Count_Down = 4000;
+            Fast_Count_Down = 3000;
         }
     }
 
