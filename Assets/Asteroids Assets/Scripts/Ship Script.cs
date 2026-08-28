@@ -20,10 +20,7 @@ public class ShipScript : MonoBehaviour
     public float Current_HP;
     public float Bullet_Speed = 100f;
     public float Bigger_Bullet_Speed = 100f;
-    public float Faster_Bullet_Speed = 200;
     public float Bigger_Fire_Timer = 0f;
-    public float Faster_Fire_Timer = 0f;
-    public float Fast_Count_Down = 3000f;
     public float Big_Count_Down = 3000f;
     public float Life_Time_MS = 0;
     
@@ -32,7 +29,6 @@ public class ShipScript : MonoBehaviour
 
     public GameObject Bullet_Ref;
     public GameObject Bigger_Bullet_Ref;
-    public GameObject Faster_Bullet_Ref;
 
     public GameObject Explosion_Ref;
     
@@ -44,7 +40,6 @@ public class ShipScript : MonoBehaviour
 
     public int Extra_Life = 0;
 
-    public bool Fast_Power_Up = false;
     public bool Big_Power_Up = false;
     public bool Engine_Thrust = false;
     public bool Meteor = false;
@@ -72,7 +67,6 @@ public class ShipScript : MonoBehaviour
     void Start()
     {
         Life_Time_MS = Life_Time_MS + Time.deltaTime;
-        Fast_Count_Down = Fast_Count_Down + Time.deltaTime;
         Big_Count_Down = Big_Count_Down + Time.deltaTime;
         Current_HP = Max_HP;
         rb2D_Ship = GetComponent<Rigidbody2D>();
@@ -131,21 +125,9 @@ public class ShipScript : MonoBehaviour
             Ship_Skin.color = Color.orange;
         }
 
-        if (Fast_Power_Up == true)
-        {
-            Update_Faster_Firing();
-            Ship_Skin = GetComponent<SpriteRenderer>();
-            Ship_Skin.color = Color.lightBlue;
-        }
-
         if (Big_Power_Up == false)
         {
             Big_Count_Down = 3001;
-        }
-
-        if (Fast_Power_Up == false)
-        {
-            Fast_Count_Down = 3001;
         }
         
         float H = Input.GetAxis("Horizontal");
@@ -154,7 +136,6 @@ public class ShipScript : MonoBehaviour
         Apply_Torque(H);
 
         Big_Count_Down -= 1;
-        Fast_Count_Down -= 1;
 
         if (Engine_Thrust == true)
         {
@@ -262,13 +243,6 @@ public class ShipScript : MonoBehaviour
         Vector2 Force = transform.up * Bullet_Speed;
         rb.AddForce(Force);
     }
-    public void Fire_Fast_Bullet()
-    {
-        GameObject Faster_Bullet = Instantiate(Faster_Bullet_Ref, transform.position, transform.rotation);
-        Rigidbody2D rb = Faster_Bullet.GetComponent<Rigidbody2D>();
-        Vector2 Force = transform.up * Faster_Bullet_Speed;
-        rb.AddForce(Force);
-    }
 
     public void Fire_Big_Bullet()
     {
@@ -307,26 +281,6 @@ public class ShipScript : MonoBehaviour
             Ship_Skin.color = Color.white;
             Default_Form = true;
             Big_Count_Down = 3000;
-        }
-    }
-
-    private void Update_Faster_Firing()
-    {
-        bool Is_Firing = Input.GetButton("Fire1");
-        Faster_Fire_Timer = Faster_Fire_Timer - Time.deltaTime;
-        if (Is_Firing == true && Faster_Fire_Timer <= 0)
-        {
-            Fire_Fast_Bullet();
-            Faster_Fire_Timer = Faster_Firing_Rate;
-        }
-
-        if (Fast_Count_Down <= 0)
-        {
-            Fast_Power_Up = false;
-            Ship_Skin = GetComponent<SpriteRenderer>();
-            Ship_Skin.color = Color.white;
-            Default_Form = true;
-            Fast_Count_Down = 3000;
         }
     }
 
@@ -388,13 +342,6 @@ public class ShipScript : MonoBehaviour
         if (Collision.gameObject.CompareTag("Big Power Up"))
         {
             Big_Power_Up = true;
-            Default_Form = false;
-            Destroy(Collision.gameObject);
-        }
-
-        if (Collision.gameObject.CompareTag("Fast Power Up"))
-        {
-            Fast_Power_Up = true;
             Default_Form = false;
             Destroy(Collision.gameObject);
         }

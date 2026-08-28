@@ -11,7 +11,7 @@ public class AlienTurretScript : MonoBehaviour
     public float Max_HP = 3f;
     public float Current_HP;
     public GameObject Explosion_Ref;
-    public GameObject Faster_Power_Up_Ref;
+    public GameObject Bigger_Power_Up_Ref;
     public GameObject Fuel_Drop_Ref;
     public int Score_Value = 75;
     public float Timer = 0f;
@@ -100,12 +100,10 @@ public class AlienTurretScript : MonoBehaviour
     }
     public void Explode()
     {
-        Instantiate(Explosion_Ref, transform.position, transform.rotation);
         if (Random.Range(0, 10) == 5)
         {
-            Instantiate(Faster_Power_Up_Ref, transform.position, transform.rotation);
+            Instantiate(Bigger_Power_Up_Ref, transform.position, transform.rotation);
         }
-
         ShipScript Ship = FindObjectOfType<ShipScript>();
 
         if (Ship != null)
